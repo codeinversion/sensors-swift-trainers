@@ -1,0 +1,19 @@
+PODS:
+  - Signals (4.0.0)
+  - SwiftySensors (0.3.2):
+    - Signals (~> 4.0)
+    - SwiftySensors/Serializers (= 0.3.2)
+  - SwiftySensors/Serializers (0.3.2):
+    - Signals (~> 4.0)
+
+DEPENDENCIES:
+  - Signals (~> 4.0)
+  - SwiftySensors (~> 0.3)
+
+SPEC CHECKSUMS:
+  Signals: 6d818e1b7c39f2bf61cfef30bf314329990d1853
+  SwiftySensors: 3e4937edcab378092e7da7e3bdc77fdd3a6d8274
+
+PODFILE CHECKSUM: 8ee5df9591c10d0902a3af4e3bebc6a1662c0f12
+
+COCOAPODS: 1.2.1
