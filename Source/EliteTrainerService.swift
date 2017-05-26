@@ -14,7 +14,7 @@ import Signals
 /// :nodoc:
 open class EliteTrainerService: Service, ServiceProtocol {
 
-    public static var uuid: String { return "347B0001–7635–408B–8918–8FF3949CE592" }
+    public static var uuid: String { return "347B0001-7635-408B-8918-8FF3949CE592" }
     
     public static var characteristicTypes: Dictionary<String, Characteristic.Type> = [
         ControlPoint.uuid:  ControlPoint.self,
@@ -25,7 +25,7 @@ open class EliteTrainerService: Service, ServiceProtocol {
     
     open class ControlPoint: Characteristic {
         
-        public static var uuid: String { return "347B0010–7635–408B–8918–8FF3949CE592" }
+        public static var uuid: String { return "347B0010-7635-408B-8918-8FF3949CE592" }
         
         public static let writeType = CBCharacteristicWriteType.withResponse
         
@@ -39,7 +39,7 @@ open class EliteTrainerService: Service, ServiceProtocol {
     
     open class OutOfRange: Characteristic {
         
-        public static var uuid: String { return "347B0011–7635–408B–8918–8FF3949CE592" }
+        public static var uuid: String { return "347B0011-7635-408B-8918-8FF3949CE592" }
         
         var outOfRange: Bool = false
         
