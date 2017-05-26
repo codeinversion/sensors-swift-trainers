@@ -35,6 +35,8 @@
 		8D7629B61ED3D59900172CFF /* Trainers-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7629AF1ED3D59900172CFF /* Trainers-Bridging-Header.h */; };
 		8D7629B71ED3D59900172CFF /* WahooTrainerCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7629B01ED3D59900172CFF /* WahooTrainerCharacteristic.swift */; };
 		8D7629B81ED3D59900172CFF /* WahooTrainerSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7629B11ED3D59900172CFF /* WahooTrainerSerializer.swift */; };
+		8DD520681ED7C4ED003E3B59 /* EliteTrainerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD520671ED7C4ED003E3B59 /* EliteTrainerService.swift */; };
+		8DD5206A1ED7C6C0003E3B59 /* EliteTrainerSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD520691ED7C6C0003E3B59 /* EliteTrainerSerializer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		8D7629AF1ED3D59900172CFF /* Trainers-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Trainers-Bridging-Header.h"; path = "Source/Trainers-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		8D7629B01ED3D59900172CFF /* WahooTrainerCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WahooTrainerCharacteristic.swift; path = Source/WahooTrainerCharacteristic.swift; sourceTree = SOURCE_ROOT; };
 		8D7629B11ED3D59900172CFF /* WahooTrainerSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WahooTrainerSerializer.swift; path = Source/WahooTrainerSerializer.swift; sourceTree = SOURCE_ROOT; };
+		8DD520671ED7C4ED003E3B59 /* EliteTrainerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EliteTrainerService.swift; path = Source/EliteTrainerService.swift; sourceTree = SOURCE_ROOT; };
+		8DD520691ED7C6C0003E3B59 /* EliteTrainerSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EliteTrainerSerializer.swift; path = Source/EliteTrainerSerializer.swift; sourceTree = SOURCE_ROOT; };
 		E0A7B4CDB09F32E65C19D54D /* Pods-SwiftySensorsTrainers iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftySensorsTrainers iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftySensorsTrainers iOS/Pods-SwiftySensorsTrainers iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		EFA1AC9FFD7F193D53E2022D /* Pods_SwiftySensorsTrainers_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftySensorsTrainers_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FCBADA13490687EC768F95 /* Pods-SwiftySensorsTrainers iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftySensorsTrainers iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftySensorsTrainers iOS/Pods-SwiftySensorsTrainers iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -119,13 +123,15 @@
 			isa = PBXGroup;
 			children = (
 				8D722AFB1ED4BCC3003C871E /* Info.plist */,
+				8D7629AF1ED3D59900172CFF /* Trainers-Bridging-Header.h */,
 				8D4566281ED7B85C00B056BF /* CycleOpsSerializer.swift */,
 				8D4566291ED7B85C00B056BF /* CycleOpsService.swift */,
+				8DD520691ED7C6C0003E3B59 /* EliteTrainerSerializer.swift */,
+				8DD520671ED7C4ED003E3B59 /* EliteTrainerService.swift */,
 				8D7629AB1ED3D59900172CFF /* InRide2Service.swift */,
 				8D7629AC1ED3D59900172CFF /* SmartControlService.swift */,
 				8D7629AD1ED3D59900172CFF /* TacxSerializer.swift */,
 				8D7629AE1ED3D59900172CFF /* TacxService.swift */,
-				8D7629AF1ED3D59900172CFF /* Trainers-Bridging-Header.h */,
 				8D7629B01ED3D59900172CFF /* WahooTrainerCharacteristic.swift */,
 				8D7629B11ED3D59900172CFF /* WahooTrainerSerializer.swift */,
 			);
@@ -373,8 +379,10 @@
 				8D7629B41ED3D59900172CFF /* TacxSerializer.swift in Sources */,
 				8D45662C1ED7B85C00B056BF /* CycleOpsService.swift in Sources */,
 				8D7629B51ED3D59900172CFF /* TacxService.swift in Sources */,
+				8DD5206A1ED7C6C0003E3B59 /* EliteTrainerSerializer.swift in Sources */,
 				8D7629B71ED3D59900172CFF /* WahooTrainerCharacteristic.swift in Sources */,
 				8D7629B21ED3D59900172CFF /* InRide2Service.swift in Sources */,
+				8DD520681ED7C4ED003E3B59 /* EliteTrainerService.swift in Sources */,
 				8D7629B31ED3D59900172CFF /* SmartControlService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

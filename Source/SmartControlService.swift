@@ -11,6 +11,7 @@ import CoreBluetooth
 import SwiftySensors
 import Signals
 
+/// :nodoc:
 open class SmartControlService: Service, ServiceProtocol {
     
     public static var uuid: String { return KineticControlPowerServiceUUID }

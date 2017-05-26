@@ -11,6 +11,7 @@ import CoreBluetooth
 import SwiftySensors
 import Signals
 
+/// :nodoc:
 open class CycleOpsService: Service, ServiceProtocol {
     
     public static var uuid: String { return "C0F4013A-A837-4165-BAB9-654EF70747C6" }
