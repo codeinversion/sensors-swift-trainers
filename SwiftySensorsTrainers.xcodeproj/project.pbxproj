@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		234C60E2596441B98BAA735D /* Pods_SwiftySensorsTrainers_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F72E2DD4C28F17FD227581 /* Pods_SwiftySensorsTrainers_iOS.framework */; };
 		2C3341E8067C395FF8158157 /* Pods_SwiftySensorsTrainers_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA1AC9FFD7F193D53E2022D /* Pods_SwiftySensorsTrainers_macOS.framework */; };
+		8D45662A1ED7B85C00B056BF /* CycleOpsSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4566281ED7B85C00B056BF /* CycleOpsSerializer.swift */; };
+		8D45662B1ED7B85C00B056BF /* CycleOpsSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4566281ED7B85C00B056BF /* CycleOpsSerializer.swift */; };
+		8D45662C1ED7B85C00B056BF /* CycleOpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4566291ED7B85C00B056BF /* CycleOpsService.swift */; };
+		8D45662D1ED7B85C00B056BF /* CycleOpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D4566291ED7B85C00B056BF /* CycleOpsService.swift */; };
 		8D722AF01ED4BBEC003C871E /* KineticControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7629A01ED3D58C00172CFF /* KineticControl.h */; };
 		8D722AF11ED4BBEC003C871E /* KineticInRide.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7629A11ED3D58C00172CFF /* KineticInRide.h */; };
 		8D722AF21ED4BBEC003C871E /* KineticSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7629A21ED3D58C00172CFF /* KineticSDK.h */; };
@@ -37,6 +41,8 @@
 		10F72E2DD4C28F17FD227581 /* Pods_SwiftySensorsTrainers_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftySensorsTrainers_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		673EF851C43D27CB2076E952 /* Pods-SwiftySensorsTrainers macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftySensorsTrainers macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftySensorsTrainers macOS/Pods-SwiftySensorsTrainers macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		80EFB613F0EC4EF0E0C9EE72 /* Pods-SwiftySensorsTrainers macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftySensorsTrainers macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftySensorsTrainers macOS/Pods-SwiftySensorsTrainers macOS.release.xcconfig"; sourceTree = "<group>"; };
+		8D4566281ED7B85C00B056BF /* CycleOpsSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CycleOpsSerializer.swift; path = Source/CycleOpsSerializer.swift; sourceTree = SOURCE_ROOT; };
+		8D4566291ED7B85C00B056BF /* CycleOpsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CycleOpsService.swift; path = Source/CycleOpsService.swift; sourceTree = SOURCE_ROOT; };
 		8D722AE81ED4BBB5003C871E /* SwiftySensorsTrainers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySensorsTrainers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D722AFB1ED4BCC3003C871E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; sourceTree = SOURCE_ROOT; };
 		8D76297A1ED3D3D000172CFF /* SwiftySensorsTrainers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySensorsTrainers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				8D722AFB1ED4BCC3003C871E /* Info.plist */,
+				8D4566281ED7B85C00B056BF /* CycleOpsSerializer.swift */,
+				8D4566291ED7B85C00B056BF /* CycleOpsService.swift */,
 				8D7629AB1ED3D59900172CFF /* InRide2Service.swift */,
 				8D7629AC1ED3D59900172CFF /* SmartControlService.swift */,
 				8D7629AD1ED3D59900172CFF /* TacxSerializer.swift */,
@@ -345,8 +353,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D45662B1ED7B85C00B056BF /* CycleOpsSerializer.swift in Sources */,
 				8D722AFA1ED4BBF7003C871E /* WahooTrainerSerializer.swift in Sources */,
 				8D722AF61ED4BBF7003C871E /* TacxSerializer.swift in Sources */,
+				8D45662D1ED7B85C00B056BF /* CycleOpsService.swift in Sources */,
 				8D722AF71ED4BBF7003C871E /* TacxService.swift in Sources */,
 				8D722AF91ED4BBF7003C871E /* WahooTrainerCharacteristic.swift in Sources */,
 				8D722AF41ED4BBF7003C871E /* InRide2Service.swift in Sources */,
@@ -358,8 +368,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D45662A1ED7B85C00B056BF /* CycleOpsSerializer.swift in Sources */,
 				8D7629B81ED3D59900172CFF /* WahooTrainerSerializer.swift in Sources */,
 				8D7629B41ED3D59900172CFF /* TacxSerializer.swift in Sources */,
+				8D45662C1ED7B85C00B056BF /* CycleOpsService.swift in Sources */,
 				8D7629B51ED3D59900172CFF /* TacxService.swift in Sources */,
 				8D7629B71ED3D59900172CFF /* WahooTrainerCharacteristic.swift in Sources */,
 				8D7629B21ED3D59900172CFF /* InRide2Service.swift in Sources */,

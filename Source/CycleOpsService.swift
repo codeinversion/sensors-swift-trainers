@@ -62,7 +62,7 @@ open class CycleOpsService: Service, ServiceProtocol {
     
     open func setHeadlessMode() {
         updateTargetWattTimer?.invalidate()
-        controlPoint?.cbCharacteristic.write(Data(int8s: CycleOpsSerializer.setControlMode(.headless)), writeType: .withResponse)
+        controlPoint?.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.headless)), writeType: .withResponse)
     }
     
     
@@ -73,7 +73,7 @@ open class CycleOpsService: Service, ServiceProtocol {
     private var targetWatts: Int16 = 0
     
     @objc private func writeTargetWatts(_ timer: Timer? = nil) {
-        controlPoint?.cbCharacteristic.write(Data(int8s: CycleOpsSerializer.setControlMode(.manualPower, parameter1: self.targetWatts)), writeType: .withResponse)
+        controlPoint?.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.manualPower, parameter1: self.targetWatts)), writeType: .withResponse)
     }
     
     open func setManualPower(_ targetWatts: Int16) {
@@ -88,22 +88,22 @@ open class CycleOpsService: Service, ServiceProtocol {
     // weight = kg * 100, grade = % * 10
     open func setManualSlope(_ riderWeight: Int16, _ gradePercent: Int16) {
         updateTargetWattTimer?.invalidate()
-        controlPoint?.cbCharacteristic.write(Data(int8s: CycleOpsSerializer.setControlMode(.manualSlope, parameter1: riderWeight, parameter2: gradePercent)), writeType: .withResponse)
+        controlPoint?.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.manualSlope, parameter1: riderWeight, parameter2: gradePercent)), writeType: .withResponse)
     }
     
     open func setPowerRange(_ lowerTargetWatts: Int16, _ upperTargetWatts: Int16) {
         updateTargetWattTimer?.invalidate()
-        controlPoint?.cbCharacteristic.write(Data(int8s: CycleOpsSerializer.setControlMode(.powerRange, parameter1: lowerTargetWatts, parameter2: upperTargetWatts)), writeType: .withResponse)
+        controlPoint?.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.powerRange, parameter1: lowerTargetWatts, parameter2: upperTargetWatts)), writeType: .withResponse)
     }
     
     open func setWarmUp() {
         updateTargetWattTimer?.invalidate()
-        controlPoint?.cbCharacteristic.write(Data(int8s: CycleOpsSerializer.setControlMode(.warmUp)), writeType: .withResponse)
+        controlPoint?.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.warmUp)), writeType: .withResponse)
     }
     
     open func setRollDown() {
         updateTargetWattTimer?.invalidate()
-        controlPoint?.cbCharacteristic.write(Data(int8s: CycleOpsSerializer.setControlMode(.rollDown)), writeType: .withResponse)
+        controlPoint?.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.rollDown)), writeType: .withResponse)
     }    
     
     open func setWheelCircumference(_ tenthsMillimeter: UInt16) {
