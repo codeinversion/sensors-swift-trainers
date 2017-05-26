@@ -16,13 +16,16 @@ use_frameworks!
 pod 'SwiftySensors'
 ```
 ### Manual
-*Coming Soon*
-
-### Carthage
-*Coming Soon*
+Copy all of the swift files in the `Sources` directory into you project.
 
 ### Swift Package Manager
-*Coming Soon*
+Add this repo url to your dependencies list:
+```
+dependencies: [
+    .Package(url: "https://github.com/kinetic-fit/sensors-swift", Version(X, X, X))
+]
+```
+*Note: If you are using the [Swifty Sensors Kinetic Plugin](https://github.com/kinetic-fit/sensors-swift-kinetic), you cannot use the Swift Package Manager at this time due to no support for objective-c libraries.*
 
 ## Usage
 

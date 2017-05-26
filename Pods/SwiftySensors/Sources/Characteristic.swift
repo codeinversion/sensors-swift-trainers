@@ -93,15 +93,3 @@ open class UTF8Characteristic: Characteristic {
     }
     
 }
-
-
-extension Data {
-    
-    /**
-     Initialize a Data object from an array of Unsigned 8-Bit Integers.
-     */
-    public init(int8s: [UInt8]) {
-        self.init(bytes: UnsafePointer<UInt8>(int8s), count: int8s.count)
-    }
-    
-}

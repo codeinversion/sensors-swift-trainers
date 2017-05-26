@@ -43,7 +43,7 @@ extension CyclingPowerService {
             cbCharacteristic.notify(true)
             
             // Wahoo Trainers have to be "unlocked" before they will respond to messages
-            cbCharacteristic.write(Data(int8s: WahooTrainerSerializer.unlockCommand()), writeType: .withResponse)
+            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.unlockCommand()), writeType: .withResponse)
         }
         
         override open func valueUpdated() {
@@ -77,7 +77,7 @@ extension CyclingPowerService {
             ergWriteTimer?.invalidate()
             ergWriteTimer = nil
             
-            cbCharacteristic.write(Data(int8s: WahooTrainerSerializer.setResistanceModeLevel(level)), writeType: .withResponse)
+            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setResistanceModeLevel(level)), writeType: .withResponse)
         }
         
         
@@ -87,7 +87,7 @@ extension CyclingPowerService {
         @objc func writeErgWatts() {
             if let watts = ergWriteWatts {
                 // ToDo: detect if the sensor has disconnected before trying to write to it (object deallocated?)
-                cbCharacteristic.write(Data(int8s: WahooTrainerSerializer.setResistanceModeErg(watts)), writeType: .withResponse)
+                cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setResistanceModeErg(watts)), writeType: .withResponse)
                 ergWriteWatts = nil
             } else {
                 ergWriteTimer?.invalidate()

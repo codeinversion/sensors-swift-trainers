@@ -299,6 +299,10 @@ extension SensorManager: CBCentralManagerDelegate {
         
         if let sensor = sensorForPeripheral(peripheral, create: false) {
             onSensorDisconnected => (sensor, error as NSError?)
+            if error != nil {
+                sensorsById.removeValue(forKey: sensor.peripheral.identifier.uuidString)
+                onSensorRemoved => sensor
+            }
         }
     }
     
