@@ -37,6 +37,8 @@
 		8D7629B81ED3D59900172CFF /* WahooTrainerSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7629B11ED3D59900172CFF /* WahooTrainerSerializer.swift */; };
 		8DD520681ED7C4ED003E3B59 /* EliteTrainerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD520671ED7C4ED003E3B59 /* EliteTrainerService.swift */; };
 		8DD5206A1ED7C6C0003E3B59 /* EliteTrainerSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD520691ED7C6C0003E3B59 /* EliteTrainerSerializer.swift */; };
+		8DD5206C1ED7CD0F003E3B59 /* JetBlackSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD5206B1ED7CD0F003E3B59 /* JetBlackSerializer.swift */; };
+		8DD5206E1ED7CFE0003E3B59 /* JetBlackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD5206D1ED7CFE0003E3B59 /* JetBlackService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		8D7629B11ED3D59900172CFF /* WahooTrainerSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WahooTrainerSerializer.swift; path = Source/WahooTrainerSerializer.swift; sourceTree = SOURCE_ROOT; };
 		8DD520671ED7C4ED003E3B59 /* EliteTrainerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EliteTrainerService.swift; path = Source/EliteTrainerService.swift; sourceTree = SOURCE_ROOT; };
 		8DD520691ED7C6C0003E3B59 /* EliteTrainerSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EliteTrainerSerializer.swift; path = Source/EliteTrainerSerializer.swift; sourceTree = SOURCE_ROOT; };
+		8DD5206B1ED7CD0F003E3B59 /* JetBlackSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JetBlackSerializer.swift; path = Source/JetBlackSerializer.swift; sourceTree = SOURCE_ROOT; };
+		8DD5206D1ED7CFE0003E3B59 /* JetBlackService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JetBlackService.swift; path = Source/JetBlackService.swift; sourceTree = SOURCE_ROOT; };
 		E0A7B4CDB09F32E65C19D54D /* Pods-SwiftySensorsTrainers iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftySensorsTrainers iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftySensorsTrainers iOS/Pods-SwiftySensorsTrainers iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		EFA1AC9FFD7F193D53E2022D /* Pods_SwiftySensorsTrainers_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftySensorsTrainers_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FCBADA13490687EC768F95 /* Pods-SwiftySensorsTrainers iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftySensorsTrainers iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftySensorsTrainers iOS/Pods-SwiftySensorsTrainers iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				8D4566291ED7B85C00B056BF /* CycleOpsService.swift */,
 				8DD520691ED7C6C0003E3B59 /* EliteTrainerSerializer.swift */,
 				8DD520671ED7C4ED003E3B59 /* EliteTrainerService.swift */,
+				8DD5206B1ED7CD0F003E3B59 /* JetBlackSerializer.swift */,
+				8DD5206D1ED7CFE0003E3B59 /* JetBlackService.swift */,
 				8D7629AB1ED3D59900172CFF /* InRide2Service.swift */,
 				8D7629AC1ED3D59900172CFF /* SmartControlService.swift */,
 				8D7629AD1ED3D59900172CFF /* TacxSerializer.swift */,
@@ -375,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D45662A1ED7B85C00B056BF /* CycleOpsSerializer.swift in Sources */,
+				8DD5206E1ED7CFE0003E3B59 /* JetBlackService.swift in Sources */,
 				8D7629B81ED3D59900172CFF /* WahooTrainerSerializer.swift in Sources */,
 				8D7629B41ED3D59900172CFF /* TacxSerializer.swift in Sources */,
 				8D45662C1ED7B85C00B056BF /* CycleOpsService.swift in Sources */,
@@ -382,6 +389,7 @@
 				8DD5206A1ED7C6C0003E3B59 /* EliteTrainerSerializer.swift in Sources */,
 				8D7629B71ED3D59900172CFF /* WahooTrainerCharacteristic.swift in Sources */,
 				8D7629B21ED3D59900172CFF /* InRide2Service.swift in Sources */,
+				8DD5206C1ED7CD0F003E3B59 /* JetBlackSerializer.swift in Sources */,
 				8DD520681ED7C4ED003E3B59 /* EliteTrainerService.swift in Sources */,
 				8D7629B31ED3D59900172CFF /* SmartControlService.swift in Sources */,
 			);
