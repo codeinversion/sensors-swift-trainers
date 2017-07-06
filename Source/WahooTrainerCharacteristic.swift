@@ -44,6 +44,12 @@ extension CyclingPowerService {
             
             // Wahoo Trainers have to be "unlocked" before they will respond to messages
             cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.unlockCommand()), writeType: .withResponse)
+            
+            service.sensor.onStateChanged.subscribe(on: self) { [weak self] sensor in
+                if sensor.peripheral.state == .disconnected {
+                    self?.ergWriteTimer?.invalidate()
+                }
+            }
         }
         
         override open func valueUpdated() {
@@ -52,7 +58,7 @@ extension CyclingPowerService {
         }
         
         // Minimum interval between ERG writes to the trainer to give it time to react and apply a new setting.
-        private static let ErgWriteDelay: TimeInterval = 2
+        private let ErgWriteDelay: TimeInterval = 2
         
         /**
          Put the trainer into ERG mode and set the target wattage.
@@ -62,9 +68,11 @@ extension CyclingPowerService {
          */
         open func setResistanceErg(_ watts: UInt16) {
             ergWriteWatts = watts
-            if ergWriteTimer == nil {
+            
+            if ergWriteTimer == nil || !ergWriteTimer!.isValid {
                 writeErgWatts()
-                ergWriteTimer = Timer.scheduledTimer(timeInterval: WahooTrainer.ErgWriteDelay, target: self, selector: #selector(WahooTrainer.writeErgWatts), userInfo: nil, repeats: true)
+                ergWriteTimer = Timer(timeInterval: ErgWriteDelay, target: self, selector: #selector(writeErgWatts(_:)), userInfo: nil, repeats: true)
+                RunLoop.main.add(ergWriteTimer!, forMode: .commonModes)
             }
         }
         
@@ -75,23 +83,17 @@ extension CyclingPowerService {
          */
         open func setResistanceLevel(_ level: UInt8) {
             ergWriteTimer?.invalidate()
-            ergWriteTimer = nil
-            
             cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setResistanceModeLevel(level)), writeType: .withResponse)
         }
-        
         
         private var ergWriteWatts: UInt16?
         private var ergWriteTimer: Timer?
         /// Private function to execute an ERG write
-        @objc func writeErgWatts() {
-            if let watts = ergWriteWatts {
-                // ToDo: detect if the sensor has disconnected before trying to write to it (object deallocated?)
-                cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setResistanceModeErg(watts)), writeType: .withResponse)
+        @objc private func writeErgWatts(_ timer: Timer? = nil) {
+            if let writeWatts = ergWriteWatts, cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setResistanceModeErg(writeWatts)), writeType: .withResponse) {
                 ergWriteWatts = nil
             } else {
                 ergWriteTimer?.invalidate()
-                ergWriteTimer = nil
             }
         }
     }

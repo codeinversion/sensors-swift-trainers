@@ -33,7 +33,6 @@ open class CycleOpsService: Service, ServiceProtocol {
             super.init(service: service, cbc: cbc)
             
             cbCharacteristic.notify(true)
-            
         }
         
         override open func valueUpdated() {
@@ -61,6 +60,16 @@ open class CycleOpsService: Service, ServiceProtocol {
         }
     }
     
+    override required public init(sensor: Sensor, cbs: CBService) {
+        super.init(sensor: sensor, cbs: cbs)
+        
+        sensor.onStateChanged.subscribe(on: self) { [weak self] sensor in
+            if sensor.peripheral.state == .disconnected {
+                self?.updateTargetWattTimer?.invalidate()
+            }
+        }
+    }
+    
     open func setHeadlessMode() {
         updateTargetWattTimer?.invalidate()
         controlPoint?.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.headless)), writeType: .withResponse)
@@ -71,14 +80,19 @@ open class CycleOpsService: Service, ServiceProtocol {
     // -- they also take 4-5 seconds for the brake to actually engage and track towared the target.
     private let MinimumWriteInterval: TimeInterval = 3
     private var updateTargetWattTimer: Timer?
-    private var targetWatts: Int16 = 0
+    private var targetWatts: Int16?
     
     @objc private func writeTargetWatts(_ timer: Timer? = nil) {
-        controlPoint?.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.manualPower, parameter1: self.targetWatts)), writeType: .withResponse)
+        if let writeWatts = targetWatts, let controlPoint = controlPoint, controlPoint.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.manualPower, parameter1: writeWatts)), writeType: .withResponse) {
+            targetWatts = nil
+        } else {
+            updateTargetWattTimer?.invalidate()
+        }
     }
     
     open func setManualPower(_ targetWatts: Int16) {
         self.targetWatts = targetWatts
+        
         if updateTargetWattTimer == nil || !updateTargetWattTimer!.isValid {
             writeTargetWatts()
             updateTargetWattTimer = Timer(timeInterval: MinimumWriteInterval, target: self, selector: #selector(writeTargetWatts(_:)), userInfo: nil, repeats: true)
@@ -105,7 +119,7 @@ open class CycleOpsService: Service, ServiceProtocol {
     open func setRollDown() {
         updateTargetWattTimer?.invalidate()
         controlPoint?.cbCharacteristic.write(Data(bytes: CycleOpsSerializer.setControlMode(.rollDown)), writeType: .withResponse)
-    }    
+    }
     
     open func setWheelCircumference(_ tenthsMillimeter: UInt16) {
         
