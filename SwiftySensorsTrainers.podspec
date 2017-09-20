@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
     spec.name           = 'SwiftySensorsTrainers'
-    spec.version        = '0.3.4'
+    spec.version        = '0.4.0'
     spec.summary        = 'Trainer Plugins for SwiftySensors'
 
     spec.homepage       = 'https://github.com/kinetic-fit/sensors-swift-trainers'
