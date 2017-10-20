@@ -18,7 +18,7 @@ Pod::Spec.new do |spec|
     spec.ios.vendored_library   = 'Libraries/libKineticSDK.a'
     spec.osx.vendored_library   = 'Libraries/libKineticSDKCocoa.a'
 
-    spec.dependency     'SwiftySensors', '~>0.3'
-    spec.dependency     'Signals', '~> 4.0'
+    spec.dependency     'SwiftySensors', '~>0.4'
+    spec.dependency     'Signals', '~> 5.0'
 
 end
