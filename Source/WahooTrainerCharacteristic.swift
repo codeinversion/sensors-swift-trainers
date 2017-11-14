@@ -45,7 +45,7 @@ extension CyclingPowerService {
             // Wahoo Trainers have to be "unlocked" before they will respond to messages
             cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.unlockCommand()), writeType: .withResponse)
             
-            service.sensor.onStateChanged.subscribe(on: self) { [weak self] sensor in
+            service.sensor.onStateChanged.subscribe(with: self) { [weak self] sensor in
                 if sensor.peripheral.state == .disconnected {
                     self?.ergWriteTimer?.invalidate()
                 }

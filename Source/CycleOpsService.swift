@@ -63,7 +63,7 @@ open class CycleOpsService: Service, ServiceProtocol {
     override required public init(sensor: Sensor, cbs: CBService) {
         super.init(sensor: sensor, cbs: cbs)
         
-        sensor.onStateChanged.subscribe(on: self) { [weak self] sensor in
+        sensor.onStateChanged.subscribe(with: self) { [weak self] sensor in
             if sensor.peripheral.state == .disconnected {
                 self?.updateTargetWattTimer?.invalidate()
             }
