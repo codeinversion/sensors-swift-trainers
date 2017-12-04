@@ -68,7 +68,8 @@ extension CyclingPowerService {
         }
         
         open func setStandardMode(level: UInt8) {
-            
+            ergWriteTimer?.invalidate()
+            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setStandardMode(level: level)), writeType: .withResponse)
         }
         
         // Minimum interval between ERG writes to the trainer to give it time to react and apply a new setting.
