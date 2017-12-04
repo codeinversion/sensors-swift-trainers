@@ -30,9 +30,15 @@ extension CBCharacteristic {
      
      - parameter data: Data to write
      - parameter writeType: BLE Write Type
+     
+     - returns: true if write performed
      */
-    public func write(_ data: Data, writeType: CBCharacteristicWriteType) {
-        service.peripheral.writeValue(data, for: self, type: writeType)
+    @discardableResult public func write(_ data: Data, writeType: CBCharacteristicWriteType) -> Bool {
+        if service.peripheral.state == .connected {
+            service.peripheral.writeValue(data, for: self, type: writeType)
+            return true
+        }
+        return false
     }
     
 }

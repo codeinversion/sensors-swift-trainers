@@ -239,7 +239,7 @@ extension SensorManager {
     }
     
     
-    func rssiUpateTimerHandler(_ timer: Timer) {
+    @objc func rssiUpateTimerHandler(_ timer: Timer) {
         let now = Date.timeIntervalSinceReferenceDate
         for sensor in sensors {
             if now - sensor.lastSensorActivity > SensorManager.InactiveInterval {

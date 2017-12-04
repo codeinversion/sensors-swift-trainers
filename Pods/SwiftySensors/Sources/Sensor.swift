@@ -204,12 +204,12 @@ extension Sensor {
             let characteristic = CharType.init(service: service, cbc: cbc)
             service.characteristics[cbc.uuid.uuidString] = characteristic
             
-            characteristic.onValueUpdated.subscribe(on: self) { [weak self] c in
+            characteristic.onValueUpdated.subscribe(with: self) { [weak self] c in
                 if let s = self {
                     s.onCharacteristicValueUpdated => (s, c)
                 }
             }
-            characteristic.onValueWritten.subscribe(on: self) { [weak self] c in
+            characteristic.onValueWritten.subscribe(with: self) { [weak self] c in
                 if let s = self {
                     s.onCharacteristicValueWritten => (s, c)
                 }
@@ -220,7 +220,7 @@ extension Sensor {
         }
     }
     
-    func rssiPingTimerHandler() {
+    @objc func rssiPingTimerHandler() {
         if peripheral.state == .connected {
             peripheral.readRSSI()
         }
