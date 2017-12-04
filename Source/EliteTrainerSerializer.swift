@@ -24,6 +24,15 @@ open class EliteTrainerSerializer {
         return [0x01, normalized]
     }
     
+    open static func setSimulationMode(_ grade: Double, crr: Double, wrc: Double, windSpeedKPH: Double = 0, draftingFactor: Double = 1) -> [UInt8] {
+        let gradeN = UInt16(((grade * 100) + 200) * 100)
+        let crrN = UInt8(crr / 0.00005)
+        let wrcN = UInt8(wrc / 0.01)
+        let windSpeed = UInt8(max(-127, min(windSpeedKPH, 128)) + 127)
+        let draftN = UInt8(draftingFactor / 0.01)
+        return [0x02, UInt8(gradeN & 0xFF), UInt8(gradeN >> 8), crrN, wrcN, windSpeed, draftN]
+    }
+    
     open static func readOutOfRangeValue(_ data: Data) -> Bool? {
         let bytes = (data as NSData).bytes.bindMemory(to: Int8.self, capacity: data.count)
         if data.count > 0 {
