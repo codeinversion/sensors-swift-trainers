@@ -13,3 +13,10 @@ target 'SwiftySensorsTrainers macOS' do
     pod 'Signals'
     pod 'SwiftySensors', :git => 'https://github.com/kinetic-fit/sensors-swift'
 end
+
+target 'SwiftySensorsTrainers tvOS' do
+    platform :tvos, '11.2'
+    
+    pod 'Signals'
+    pod 'SwiftySensors', :git => 'https://github.com/kinetic-fit/sensors-swift'
+end

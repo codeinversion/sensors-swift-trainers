@@ -16,13 +16,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftySensors:
-    :commit: ff2687a7651c39e080a3ae6fde235c7ec010df93
+    :commit: 2269a29cc1711d94d515e0518c39abef21788a08
     :git: https://github.com/kinetic-fit/sensors-swift
 
 SPEC CHECKSUMS:
   Signals: 6c41253cc172e4251d6064341bbc555a589c8d9f
-  SwiftySensors: d04f556d28390daaf97b8faa1b368b7c81498b58
+  SwiftySensors: 772f8dc082d698874439aff9397a71e16cff4d1c
 
-PODFILE CHECKSUM: e70bebcf5cb3466c34f97044b3aa8c5cd020f631
+PODFILE CHECKSUM: aab3cb062d14952238f7d162b261da78f785751d
 
 COCOAPODS: 1.4.0.beta.2

@@ -169,11 +169,11 @@ typedef NS_ENUM (uint8_t, KineticControlCalibrationState)
 /*!
  Creates the Command to put the Resistance Unit into Simulation mode.
  
- @param weight Weight of Rider and Bike in Kilograms (kg)
+ @param weightKG Weight of Rider and Bike in Kilograms (kg)
  @param rollingCoeff Rolling Resistance Coefficient (0.004 for asphault)
- @param windResistance Wind Resistance Coeffienct (0.6 default)
+ @param windCoeff Wind Resistance Coeffienct (0.6 default)
  @param grade Grade (-45 to 45) of simulated hill
- @param windSpeed Head or Tail wind speed (meters / second)
+ @param windSpeedMPS Head or Tail wind speed (meters / second)
  
  @return Write this NSData to the Control Point Characteristic (w/ response)
  */
@@ -207,7 +207,7 @@ typedef NS_ENUM (uint8_t, KineticControlCalibrationState)
 /*!
  Creates the Command to set a custom name in the Advertisement Data.
  
- @param name The new name for the sensor.
+ @param deviceName The new name for the sensor.
  
  @return Write this NSData to the Control Point Characteristic (w/ response)
  */
@@ -230,13 +230,29 @@ extern uint16_t const KineticControlUSBProductId;
 /*! Smart Control USB Characterisic Identifier */
 typedef NS_ENUM (uint16_t, KineticControlUSBCharacteristic)
 {
-    KineticControlUSBCharacteristicPower            = 0x0201,
-    KineticControlUSBCharacteristicConfig           = 0x0202,
-    KineticControlUSBCharacteristicControlPoint     = 0x0203,
-    KineticControlUSBCharacteristicDebug            = 0x0204,
-    KineticControlUSBCharacteristicSystemID         = 0x2a23,
-    KineticControlUSBCharacteristicFirmwareRevision = 0x2a26,
-    KineticControlUSBCharacteristicRawStream        = 0x0cad
+    KineticControlUSBCharacteristicDeviceName           = 0x2A00,
+    KineticControlUSBCharacteristicAppearance           = 0x2A01,
+    KineticControlUSBCharacteristicSystemID             = 0x2A23,
+    KineticControlUSBCharacteristicModelNumber          = 0x2A24,
+    KineticControlUSBCharacteristicFirmwareVer          = 0x2A26,
+    KineticControlUSBCharacteristicHardwareRev          = 0x2A27,
+    KineticControlUSBCharacteristicManufacturer         = 0x2A29,
+    KineticControlUSBCharacteristicFtmsFeature          = 0x2ACC,
+    KineticControlUSBCharacteristicFtmsControl          = 0x2AD9,
+    KineticControlUSBCharacteristicFtmsStatus           = 0x2ADA,
+    KineticControlUSBCharacteristicFtmsTrainingStatus   = 0x2AD3,
+    KineticControlUSBCharacteristicFtmsBikeData         = 0x2AD2,
+    KineticControlUSBCharacteristicFtmsResistanceRange  = 0x2AD6,
+    KineticControlUSBCharacteristicFtmsPowerRange       = 0x2AD8,
+    KineticControlUSBCharacteristicPower                = 0x0201,
+    KineticControlUSBCharacteristicConfig               = 0x0202,
+    KineticControlUSBCharacteristicControlPoint         = 0x0203,
+    KineticControlUSBCharacteristicDebug                = 0x0204,
+    KineticControlUSBCharacteristicConfig2              = 0x0301,
+    KineticControlUSBCharacteristicControl2             = 0x0302,
+    KineticControlUSBCharacteristicDebug2               = 0x0303,
+    KineticControlUSBCharacteristicWeight2              = 0x0304,
+    KineticControlUSBCharacteristicStream               = 0x0342,
 };
 
 /*! Smart Control USB Packet */
@@ -262,7 +278,7 @@ typedef NS_ENUM (uint16_t, KineticControlUSBCharacteristic)
  
  @param read Request Smart Control to send the data of non-broadcast Characteristic
  @param write Indicate that the packet contains data to write to the specific Characteristic
- @param idenfitifer The Characteristic Identifier to Read / Write to
+ @param identifier The Characteristic Identifier to Read / Write to
  @param data The data to write to the Characteristic (if indicated)
  
  @return The data packet to write to the serial USB device

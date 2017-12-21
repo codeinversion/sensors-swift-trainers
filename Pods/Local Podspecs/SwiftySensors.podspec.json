@@ -12,7 +12,8 @@
   },
   "platforms": {
     "ios": "8.2",
-    "osx": "10.13"
+    "osx": "10.13",
+    "tvos": "11.2"
   },
   "source": {
     "git": "https://github.com/kinetic-fit/sensors-swift.git",

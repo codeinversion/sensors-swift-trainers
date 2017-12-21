@@ -112,8 +112,8 @@ open class FitnessMachineService: Service, ServiceProtocol {
             cbCharacteristic.write(Data(bytes: FitnessMachineSerializer.setTargetResistanceLevel(level: level)), writeType: .withResponse)
         }
         
-        open func setIndoorBikeSimulationParameters(windSpeed: Int16, grade: Int16, crr: UInt8, cw: UInt8) {
-            cbCharacteristic.write(Data(bytes: FitnessMachineSerializer.setIndoorBikeSimulationParameters(windSpeed: windSpeed, grade: grade, crr: crr, cw: cw)), writeType: .withResponse)
+        open func setIndoorBikeSimulationParameters(windSpeed: Float, grade: Float, crr: Float, crw: Float) {
+            cbCharacteristic.write(Data(bytes: FitnessMachineSerializer.setIndoorBikeSimulationParameters(windSpeed: windSpeed, grade: grade, crr: crr, crw: crw)), writeType: .withResponse)
         }
         
         open func startSpindownProcess() {

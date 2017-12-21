@@ -188,8 +188,10 @@ extension Sensor {
                 let charUUIDs: [CBUUID] = type(of: sp).characteristicTypes.keys.map { uuid in
                     return CBUUID(string: uuid)
                 }
-                peripheral.discoverCharacteristics(charUUIDs, for: cbs)
+                peripheral.discoverCharacteristics(charUUIDs.count > 0 ? charUUIDs : nil, for: cbs)
             }
+        } else {
+            SensorManager.logSensorMessage?("Sensor: Service Ignored: \(cbs)")
         }
     }
     
@@ -217,6 +219,8 @@ extension Sensor {
             
             SensorManager.logSensorMessage?("Sensor: Characteristic Created: \(characteristic)")
             onCharacteristicDiscovered => (self, characteristic)
+        } else {
+            SensorManager.logSensorMessage?("Sensor: Characteristic Ignored: \(cbc)")
         }
     }
     

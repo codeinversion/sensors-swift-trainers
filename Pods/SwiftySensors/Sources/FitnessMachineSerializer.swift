@@ -178,17 +178,21 @@ open class FitnessMachineSerializer {
         return response
     }
     
-    open static func setIndoorBikeSimulationParameters(windSpeed: Int16, grade: Int16, crr: UInt8, cw: UInt8) -> [UInt8] {
+    open static func setIndoorBikeSimulationParameters(windSpeed: Float, grade: Float, crr: Float, crw: Float) -> [UInt8] {
         // windSpeed = meters / second  res 0.001
         // grade = percentage           res 0.01
         // crr = unitless               res 0.0001
         // cw = kg / meter              res 0.01
+        let mpsN = Int16(windSpeed * 1000)
+        let gradeN = Int16(grade * 100)
+        let crrN = UInt8(crr * 10000)
+        let crwN = UInt8(crw * 100)
         return [
             ControlOpCode.setIndoorBikeSimulationParameters.rawValue,
-            UInt8(windSpeed & 0xFF), UInt8(windSpeed >> 8),
-            UInt8(grade & 0xFF), UInt8(grade >> 8),
-            crr,
-            cw
+            UInt8(mpsN & 0xFF), UInt8(mpsN >> 8),
+            UInt8(gradeN & 0xFF), UInt8(gradeN >> 8),
+            crrN,
+            crwN
         ]
     }
     
@@ -226,9 +230,10 @@ open class FitnessMachineSerializer {
     
     open static func setTargetResistanceLevel(level: Int16) -> [UInt8] {
         // level = unitless     res 0.1
+        let levelN = level * 10
         return [
             ControlOpCode.setTargetResistanceLevel.rawValue,
-            UInt8(level & 0xFF), UInt8(level >> 8)
+            UInt8(levelN & 0xFF), UInt8(levelN >> 8)
         ]
     }
     
@@ -246,6 +251,12 @@ open class FitnessMachineSerializer {
         ]
     }
     
+    open static func ignoreSpinDownControlRequest() -> [UInt8] {
+        return [
+            ControlOpCode.spinDownControl.rawValue,
+            0x02
+        ]
+    }
     
     public struct IndoorBikeDataFlags: OptionSet {
         public let rawValue: UInt16
@@ -299,7 +310,7 @@ open class FitnessMachineSerializer {
         let rawFlags: UInt16 = ((UInt16)(bytes[index++=])) | ((UInt16)(bytes[index++=])) << 8
         bikeData.flags = IndoorBikeDataFlags(rawValue: rawFlags)
         
-        if bikeData.flags.contains(.MoreData) {
+        if !bikeData.flags.contains(.MoreData) {
             let value: UInt16 = ((UInt16)(bytes[index++=])) | ((UInt16)(bytes[index++=])) << 8
             bikeData.instantaneousSpeed = Double(value) / 100.0
         }
@@ -385,4 +396,5 @@ open class FitnessMachineSerializer {
         response.minimumIncrement = ((UInt16)(bytes[4])) | ((UInt16)(bytes[5])) << 8
         return response
     }
+    
 }
