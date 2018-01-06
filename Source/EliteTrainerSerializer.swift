@@ -15,7 +15,7 @@ open class EliteTrainerSerializer {
     
     open static func setTargetPower(_ watts: UInt16) -> [UInt8] {
         let clamped = min(watts, 4000)
-        return [0x00, UInt8(clamped & 0xFF), UInt8(clamped >> 8)]
+        return [0x00, UInt8(clamped & 0xFF), UInt8(clamped >> 8 & 0xFF)]
     }
     
     open static func setBrakeLevel(_ level: Double) -> [UInt8] {
@@ -30,13 +30,13 @@ open class EliteTrainerSerializer {
         let wrcN = UInt8(wrc / 0.01)
         let windSpeed = UInt8(max(-127, min(windSpeedKPH, 128)) + 127)
         let draftN = UInt8(draftingFactor / 0.01)
-        return [0x02, UInt8(gradeN & 0xFF), UInt8(gradeN >> 8), crrN, wrcN, windSpeed, draftN]
+        return [0x02, UInt8(gradeN & 0xFF), UInt8(gradeN >> 8 & 0xFF), crrN, wrcN, windSpeed, draftN]
     }
     
     open static func readOutOfRangeValue(_ data: Data) -> Bool? {
-        let bytes = (data as NSData).bytes.bindMemory(to: Int8.self, capacity: data.count)
+        let bytes = data.map { $0 }
         if data.count > 0 {
-            if bytes[0] == -1 {
+            if Int8(bytes[0]) == -1 {
                 return true
             }
             return false

@@ -45,7 +45,7 @@ open class TacxSerializer {
     }
     
     open static func identifyPacket(_ data: Data) -> FECPacket? {
-        let bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
+        let bytes = data.map { $0 }
         
         let packetLength = data.count
         if data.count >= 5 {
@@ -67,7 +67,7 @@ open class TacxSerializer {
     }
     
     open static func readCalibrationCommand(_ data: Data) -> CalibrationResult {
-        let bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
+        let bytes = data.map { $0 }
         
         var result = CalibrationResult()
         result.spindownSuccess = bytes[0] & 0x01 == 0x01

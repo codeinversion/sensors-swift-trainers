@@ -47,7 +47,7 @@ open class WahooTrainerSerializer {
         return [
             WahooTrainerSerializer.OperationCode.setResistanceMode.rawValue,
             UInt8(norm & 0xFF),
-            UInt8(norm >> 8)
+            UInt8(norm >> 8 & 0xFF)
         ]
     }
     
@@ -62,7 +62,7 @@ open class WahooTrainerSerializer {
         return [
             WahooTrainerSerializer.OperationCode.setErgMode.rawValue,
             UInt8(watts & 0xFF),
-            UInt8(watts >> 8)
+            UInt8(watts >> 8 & 0xFF)
         ]
         // response: 0x01 0x42 0x01 0x00 watts1 watts2
     }
@@ -74,11 +74,11 @@ open class WahooTrainerSerializer {
         return [
             WahooTrainerSerializer.OperationCode.setSimMode.rawValue,
             UInt8(weightN & 0xFF),
-            UInt8(weightN >> 8),
+            UInt8(weightN >> 8 & 0xFF),
             UInt8(rrcN & 0xFF),
-            UInt8(rrcN >> 8),
+            UInt8(rrcN >> 8 & 0xFF),
             UInt8(wrcN & 0xFF),
-            UInt8(wrcN >> 8)
+            UInt8(wrcN >> 8 & 0xFF)
         ]
     }
     
@@ -88,7 +88,7 @@ open class WahooTrainerSerializer {
         return [
             WahooTrainerSerializer.OperationCode.setSimCRR.rawValue,
             UInt8(rrcN & 0xFF),
-            UInt8(rrcN >> 8)
+            UInt8(rrcN >> 8 & 0xFF)
         ]
     }
     
@@ -98,7 +98,7 @@ open class WahooTrainerSerializer {
         return [
             WahooTrainerSerializer.OperationCode.setSimWindResistance.rawValue,
             UInt8(wrcN & 0xFF),
-            UInt8(wrcN >> 8)
+            UInt8(wrcN >> 8 & 0xFF)
         ]
     }
     
@@ -107,7 +107,7 @@ open class WahooTrainerSerializer {
         return [
             WahooTrainerSerializer.OperationCode.setSimGrade.rawValue,
             UInt8(norm & 0xFF),
-            UInt8(norm >> 8)
+            UInt8(norm >> 8 & 0xFF)
         ]
     }
     
@@ -116,7 +116,7 @@ open class WahooTrainerSerializer {
         return [
             WahooTrainerSerializer.OperationCode.setSimWindSpeed.rawValue,
             UInt8(norm & 0xFF),
-            UInt8(norm >> 8)
+            UInt8(norm >> 8 & 0xFF)
         ]
     }
     
@@ -125,12 +125,12 @@ open class WahooTrainerSerializer {
         return [
             WahooTrainerSerializer.OperationCode.setWheelCircumference.rawValue,
             UInt8(norm & 0xFF),
-            UInt8(norm >> 8)
+            UInt8(norm >> 8 & 0xFF)
         ]
     }
     
     open static func readReponse(_ data: Data) -> Response? {
-        let bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
+        let bytes = data.map { $0 }
         let result = bytes[0]   // 01 = success
         let opCodeRaw = bytes[1]
         if let opCode = WahooTrainerSerializer.OperationCode(rawValue: opCodeRaw) {

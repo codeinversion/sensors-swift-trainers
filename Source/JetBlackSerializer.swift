@@ -26,12 +26,12 @@ open class JetBlackSerializer {
     }
     
     open static func setTargetPower(_ watts: UInt16) -> [UInt8] {
-        return [0xFF, 0xFF, UInt8(watts & 0xFF), UInt8(watts >> 8), 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+        return [0xFF, 0xFF, UInt8(watts & 0xFF), UInt8(watts >> 8 & 0xFF), 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
                 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
     }
     
     open static func setRiderWeight(_ weight: UInt16) -> [UInt8] {
-        return [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, UInt8(weight & 0xFF), UInt8(weight >> 8), 0xFF, 0xFF, 0xFF,
+        return [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, UInt8(weight & 0xFF), UInt8(weight >> 8 & 0xFF), 0xFF, 0xFF, 0xFF,
                 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
     }
     
@@ -42,7 +42,7 @@ open class JetBlackSerializer {
     }
     
     open static func readFastChange(_ data: Data) -> FastChangeData {
-        let bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
+        let bytes = data.map { $0 }
         let fast = FastChangeData()
         // Included Data:
         // Elapsed Time
@@ -70,7 +70,7 @@ open class JetBlackSerializer {
     }
     
     open static func readSlowChange(_ data: Data) -> SlowChangeData {
-        let bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
+        let bytes = data.map { $0 }
         let slow = SlowChangeData()
         // Included Data:
         // FE State

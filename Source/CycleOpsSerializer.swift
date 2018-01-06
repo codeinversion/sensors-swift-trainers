@@ -45,14 +45,14 @@ open class CycleOpsSerializer {
         return [
             0x00, 0x10,
             mode.rawValue,
-            UInt8(parameter1 & 0xFF), UInt8(parameter1 >> 8),
-            UInt8(parameter2 & 0xFF), UInt8(parameter2 >> 8),
+            UInt8(parameter1 & 0xFF), UInt8(parameter1 >> 8 & 0xFF),
+            UInt8(parameter2 & 0xFF), UInt8(parameter2 >> 8 & 0xFF),
             0x00, 0x00, 0x00
         ]
     }
     
     open static func readReponse(_ data: Data) -> Response? {
-        let bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
+        let bytes = data.map { $0 }
         var index: Int = 0
         let _ = ((UInt16)(bytes[index++=])) | ((UInt16)(bytes[index++=])) << 8 //  response code
         let commandIdRaw = ((UInt16)(bytes[index++=])) | ((UInt16)(bytes[index++=])) << 8
