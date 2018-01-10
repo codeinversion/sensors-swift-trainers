@@ -108,11 +108,10 @@ open class KineticSerializer {
     private static let USBPacketEscape: UInt8 = 0xE6
     private static let USBPacketEscapeXOR: UInt8 = 0x80
     
-    
     public static func usbRequestRead(_ read: Bool, write: Bool, id: KineticControlUSBCharacteristic, data: Data? = nil) -> Data {
         var crcData: [UInt8] = []
-        crcData.append(UInt8(id.rawValue >> 8))
         crcData.append(UInt8(id.rawValue & 0xFF))
+        crcData.append(UInt8(id.rawValue >> 8 & 0xFF))
         var type: UInt8 = 0x00
         if read {
             type |= 0x01
