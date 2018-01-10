@@ -25,32 +25,68 @@ open class KineticSerializer {
     public struct KineticControlPointResponse {
         fileprivate(set) public var requestCode: UInt8 = 0
         fileprivate(set) public var result: UInt8 = 0
-        
     }
     
-    public static func readConfig(_ data: Data) -> KineticConfig {
-        let bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
-        var config = KineticConfig()
-        config.systemStatus = ((UInt16)(bytes[0])) | ((UInt16)(bytes[1])) << 8
-        config.calibrationState = bytes[2]
-        config.firmwareUpdateState = bytes[3]
-        config.bleRevision = bytes[4]
-        config.brakeStrength = bytes[5]
-        config.brakeOffset = bytes[6]
-        config.antirattleRamp = bytes[7]
+    public static func readConfig(_ data: Data) -> KineticConfig? {
+        let bytes = data.map { $0 }
+        if bytes.count > 7 {
+            var config = KineticConfig()
+            config.systemStatus = ((UInt16)(bytes[0])) | ((UInt16)(bytes[1])) << 8
+            config.calibrationState = bytes[2]
+            config.firmwareUpdateState = bytes[3]
+            config.bleRevision = bytes[4]
+            config.brakeStrength = bytes[5]
+            config.brakeOffset = bytes[6]
+            config.antirattleRamp = bytes[7]
+            return config
+        }
+        return nil
+    }
 
-        return config
+    public static func readControlPointResponse(_ data: Data) -> KineticControlPointResponse? {
+        let bytes = data.map { $0 }
+        if bytes.count > 2 {
+            var response = KineticControlPointResponse()
+            response.requestCode = bytes[1]
+            response.result = bytes[2]
+            return response
+        }
+        return nil
+    }
+    
+    
+    public struct KineticDebugData {
+        fileprivate(set) public var mode: UInt8 = 0
+        fileprivate(set) public var targetResistance: UInt16 = 0
+        fileprivate(set) public var actualResistance: UInt16 = 0
+        fileprivate(set) public var targetPosition: UInt16 = 0
+        fileprivate(set) public var actualPosition: UInt16 = 0
+        fileprivate(set) public var tempSensorVal: Int16 = 0
+        fileprivate(set) public var tempDieVal: Int16 = 0
+        fileprivate(set) public var tempCalculated: UInt16 = 0
+        fileprivate(set) public var homeAccuracy: Int16 = 0
+        fileprivate(set) public var bleBuild: UInt8 = 0
+    }
+    
+    public static func readDebugData(_ data: Data) -> KineticDebugData? {
+        let bytes = data.map { $0 }
+        if bytes.count > 17 {
+            var debugData = KineticDebugData()
+            debugData.mode = bytes[0]
+            debugData.targetResistance = UInt16(bytes[1]) | UInt16(bytes[2]) << 8
+            debugData.actualResistance = UInt16(bytes[3]) | UInt16(bytes[4]) << 8
+            debugData.targetPosition = UInt16(bytes[5]) | UInt16(bytes[6]) << 8
+            debugData.actualPosition = UInt16(bytes[7]) | UInt16(bytes[8]) << 8
+            debugData.tempSensorVal = Int16(bytes[9]) | Int16(bytes[10]) << 8
+            debugData.tempDieVal = Int16(bytes[11]) | Int16(bytes[12]) << 8
+            debugData.tempCalculated = UInt16(bytes[13]) | UInt16(bytes[14]) << 8
+            debugData.homeAccuracy = Int16(bytes[15]) | Int16(bytes[16]) << 8
+            debugData.bleBuild = bytes[17]
+            return debugData
+        }
+        return nil
     }
 
-    public static func readControlPointResponse(_ data: Data) -> KineticControlPointResponse {
-        let bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
-        var response = KineticControlPointResponse()
-        response.requestCode = bytes[1]
-        response.result = bytes[2]
-        return response
-    }
-    
-    
     
     
     

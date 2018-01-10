@@ -33,15 +33,17 @@ open class KineticService: Service, ServiceProtocol {
     open class Configuration: Characteristic {
         public static let uuid: String = "E9410301-B434-446B-B5CC-36592FC4C724"
         
+        public var config: KineticSerializer.KineticConfig?
+        
         required public init(service: Service, cbc: CBCharacteristic) {
             super.init(service: service, cbc: cbc)
             
-            cbCharacteristic.read()
+            cbCharacteristic.notify(true)
         }
         
         override open func valueUpdated() {
             if let value = cbCharacteristic.value {
-
+                config = KineticSerializer.readConfig(value)
             }
             super.valueUpdated()
         }
@@ -54,12 +56,13 @@ open class KineticService: Service, ServiceProtocol {
         required public init(service: Service, cbc: CBCharacteristic) {
             super.init(service: service, cbc: cbc)
             
-            cbCharacteristic.read()
+            cbCharacteristic.notify(true)
         }
         
         override open func valueUpdated() {
             if let value = cbCharacteristic.value {
-                
+                let response = KineticSerializer.readControlPointResponse(value)
+                print(response)
             }
             super.valueUpdated()
         }
@@ -68,15 +71,17 @@ open class KineticService: Service, ServiceProtocol {
     open class Debug: Characteristic {
         public static let uuid: String = "E9410303-B434-446B-B5CC-36592FC4C724"
         
+        public var debugData: KineticSerializer.KineticDebugData?
+        
         required public init(service: Service, cbc: CBCharacteristic) {
             super.init(service: service, cbc: cbc)
             
-            cbCharacteristic.read()
+            cbCharacteristic.notify(true)
         }
         
         override open func valueUpdated() {
             if let value = cbCharacteristic.value {
-                
+                debugData = KineticSerializer.readDebugData(value)
             }
             super.valueUpdated()
         }
@@ -94,8 +99,8 @@ open class KineticService: Service, ServiceProtocol {
         private(set) var weight: UInt8 = 0
         
         override open func valueUpdated() {
-            if let value = cbCharacteristic.value, value.count > 0 {
-                value.copyBytes(to: &weight, count: 1)
+            if let value = cbCharacteristic.value?.first {
+                weight = value
             }
             super.valueUpdated()
         }
