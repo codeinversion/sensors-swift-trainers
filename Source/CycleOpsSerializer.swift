@@ -54,12 +54,12 @@ open class CycleOpsSerializer {
     open static func readReponse(_ data: Data) -> Response? {
         let bytes = data.map { $0 }
         var index: Int = 0
-        let _ = ((UInt16)(bytes[index++=])) | ((UInt16)(bytes[index++=])) << 8 //  response code
-        let commandIdRaw = ((UInt16)(bytes[index++=])) | ((UInt16)(bytes[index++=])) << 8
+        let _ = UInt16(bytes[index++=]) | UInt16(bytes[index++=]) << 8 //  response code
+        let commandIdRaw = UInt16(bytes[index++=]) | UInt16(bytes[index++=]) << 8
         if commandIdRaw == 0x1000 {
             let controlRaw = bytes[index++=]
-            let parameter1 = ((Int16)(bytes[index++=])) | ((Int16)(bytes[index++=])) << 8
-            let parameter2 = ((Int16)(bytes[index++=])) | ((Int16)(bytes[index++=])) << 8
+            let parameter1 = Int16(bytes[index++=]) | Int16(bytes[index++=]) << 8
+            let parameter2 = Int16(bytes[index++=]) | Int16(bytes[index++=]) << 8
             let statusRaw = bytes[index++=]
             
             if let controlMode = CycleOpsSerializer.ControlMode(rawValue: controlRaw) {

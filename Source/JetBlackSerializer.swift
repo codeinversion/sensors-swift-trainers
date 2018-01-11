@@ -58,13 +58,13 @@ open class JetBlackSerializer {
         // Rolling Coefficient
         
         if data.count >= 4 {
-            fast.speed = (UInt16)(bytes[2]) | ((UInt16)(bytes[3]) << 8)
+            fast.speed = UInt16(bytes[2]) | UInt16(bytes[3]) << 8
         }
         if data.count >= 5 {
             fast.cadence = bytes[4]
         }
         if data.count >= 7 {
-            fast.power = (UInt16)(bytes[5]) | ((UInt16)(bytes[6]) << 8)
+            fast.power = UInt16(bytes[5]) | UInt16(bytes[6]) << 8
         }
         return fast
     }
@@ -85,10 +85,10 @@ open class JetBlackSerializer {
         // Gear Ratio
         
         if data.count >= 4 {
-            slow.targetPower = (UInt16)(bytes[2]) | ((UInt16)(bytes[3]) << 8)
+            slow.targetPower = UInt16(bytes[2]) | UInt16(bytes[3]) << 8
         }
         if data.count >= 7 {
-            slow.userWeight = (UInt16)(bytes[5]) | ((UInt16)(bytes[6]) << 8)
+            slow.userWeight = UInt16(bytes[5]) | UInt16(bytes[6]) << 8
         }
         return slow
     }
