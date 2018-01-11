@@ -61,8 +61,7 @@ open class KineticService: Service, ServiceProtocol {
         
         override open func valueUpdated() {
             if let value = cbCharacteristic.value {
-                let response = KineticSerializer.readControlPointResponse(value)
-                print(response)
+                let _ = KineticSerializer.readControlPointResponse(value)
             }
             super.valueUpdated()
         }

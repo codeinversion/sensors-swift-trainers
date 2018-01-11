@@ -31,7 +31,7 @@ open class KineticSerializer {
         let bytes = data.map { $0 }
         if bytes.count > 7 {
             var config = KineticConfig()
-            config.systemStatus = ((UInt16)(bytes[0])) | ((UInt16)(bytes[1])) << 8
+            config.systemStatus = UInt16(bytes[0]) | UInt16(bytes[1]) << 8
             config.calibrationState = bytes[2]
             config.firmwareUpdateState = bytes[3]
             config.bleRevision = bytes[4]

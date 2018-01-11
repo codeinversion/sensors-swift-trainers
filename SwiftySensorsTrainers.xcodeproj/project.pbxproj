@@ -33,6 +33,12 @@
 		8D7629A61ED3D58C00172CFF /* KineticControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7629A01ED3D58C00172CFF /* KineticControl.h */; };
 		8D7629A71ED3D58C00172CFF /* KineticInRide.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7629A11ED3D58C00172CFF /* KineticInRide.h */; };
 		8D7629A81ED3D58C00172CFF /* KineticSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D7629A21ED3D58C00172CFF /* KineticSDK.h */; };
+		8D93C1FD2006DD6700813DA2 /* KineticSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D93C1FB2006DD6600813DA2 /* KineticSerializer.swift */; };
+		8D93C1FE2006DD6700813DA2 /* KineticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D93C1FC2006DD6600813DA2 /* KineticService.swift */; };
+		8D93C1FF2006DD6D00813DA2 /* KineticSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D93C1FB2006DD6600813DA2 /* KineticSerializer.swift */; };
+		8D93C2002006DD6D00813DA2 /* KineticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D93C1FC2006DD6600813DA2 /* KineticService.swift */; };
+		8D93C2012006DD6E00813DA2 /* KineticSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D93C1FB2006DD6600813DA2 /* KineticSerializer.swift */; };
+		8D93C2022006DD6E00813DA2 /* KineticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D93C1FC2006DD6600813DA2 /* KineticService.swift */; };
 		8DBA0BA21FD600A000A4544D /* JetBlackSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA0B941FD600A000A4544D /* JetBlackSerializer.swift */; };
 		8DBA0BA31FD600A000A4544D /* JetBlackSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA0B941FD600A000A4544D /* JetBlackSerializer.swift */; };
 		8DBA0BA41FD600A000A4544D /* WahooTrainerCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA0B951FD600A000A4544D /* WahooTrainerCharacteristic.swift */; };
@@ -78,6 +84,8 @@
 		8D7629A01ED3D58C00172CFF /* KineticControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KineticControl.h; sourceTree = "<group>"; };
 		8D7629A11ED3D58C00172CFF /* KineticInRide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KineticInRide.h; sourceTree = "<group>"; };
 		8D7629A21ED3D58C00172CFF /* KineticSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KineticSDK.h; sourceTree = "<group>"; };
+		8D93C1FB2006DD6600813DA2 /* KineticSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KineticSerializer.swift; sourceTree = "<group>"; };
+		8D93C1FC2006DD6600813DA2 /* KineticService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KineticService.swift; sourceTree = "<group>"; };
 		8DBA0B941FD600A000A4544D /* JetBlackSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JetBlackSerializer.swift; sourceTree = "<group>"; };
 		8DBA0B951FD600A000A4544D /* WahooTrainerCharacteristic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WahooTrainerCharacteristic.swift; sourceTree = "<group>"; };
 		8DBA0B961FD600A000A4544D /* TacxService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TacxService.swift; sourceTree = "<group>"; };
@@ -196,6 +204,8 @@
 				8DBA0B981FD600A000A4544D /* InRide2Service.swift */,
 				8DBA0B9E1FD600A000A4544D /* JetBlackService.swift */,
 				8DBA0B941FD600A000A4544D /* JetBlackSerializer.swift */,
+				8D93C1FB2006DD6600813DA2 /* KineticSerializer.swift */,
+				8D93C1FC2006DD6600813DA2 /* KineticService.swift */,
 				8DBA0B9B1FD600A000A4544D /* SmartControlService.swift */,
 				8DBA0B961FD600A000A4544D /* TacxService.swift */,
 				8DBA0B971FD600A000A4544D /* TacxSerializer.swift */,
@@ -487,9 +497,11 @@
 				8D0B37661FE18D870073A7F7 /* CycleOpsSerializer.swift in Sources */,
 				8D0B37671FE18D870073A7F7 /* JetBlackSerializer.swift in Sources */,
 				8D0B37681FE18D870073A7F7 /* SmartControlService.swift in Sources */,
+				8D93C2022006DD6E00813DA2 /* KineticService.swift in Sources */,
 				8D0B37691FE18D870073A7F7 /* EliteTrainerService.swift in Sources */,
 				8D0B376A1FE18D870073A7F7 /* TacxService.swift in Sources */,
 				8D0B376B1FE18D870073A7F7 /* WahooTrainerSerializer.swift in Sources */,
+				8D93C2012006DD6E00813DA2 /* KineticSerializer.swift in Sources */,
 				8D0B376C1FE18D870073A7F7 /* TacxSerializer.swift in Sources */,
 				8D0B376D1FE18D870073A7F7 /* WahooTrainerCharacteristic.swift in Sources */,
 				8D0B376E1FE18D870073A7F7 /* EliteTrainerSerializer.swift in Sources */,
@@ -506,9 +518,11 @@
 				8DBA0BA31FD600A000A4544D /* JetBlackSerializer.swift in Sources */,
 				8DBA0BA51FD600A000A4544D /* WahooTrainerCharacteristic.swift in Sources */,
 				8DBA0BB11FD600A000A4544D /* SmartControlService.swift in Sources */,
+				8D93C2002006DD6D00813DA2 /* KineticService.swift in Sources */,
 				8DBA0BBD1FD600A000A4544D /* EliteTrainerSerializer.swift in Sources */,
 				8DBA0BB51FD600A000A4544D /* WahooTrainerSerializer.swift in Sources */,
 				8DBA0BAF1FD600A000A4544D /* CycleOpsSerializer.swift in Sources */,
+				8D93C1FF2006DD6D00813DA2 /* KineticSerializer.swift in Sources */,
 				8DBA0BA91FD600A000A4544D /* TacxSerializer.swift in Sources */,
 				8DBA0BB71FD600A000A4544D /* JetBlackService.swift in Sources */,
 				8DBA0BB91FD600A000A4544D /* CycleOpsService.swift in Sources */,
@@ -525,9 +539,11 @@
 				8DBA0BAE1FD600A000A4544D /* CycleOpsSerializer.swift in Sources */,
 				8DBA0BA21FD600A000A4544D /* JetBlackSerializer.swift in Sources */,
 				8DBA0BB01FD600A000A4544D /* SmartControlService.swift in Sources */,
+				8D93C1FE2006DD6700813DA2 /* KineticService.swift in Sources */,
 				8DBA0BB21FD600A000A4544D /* EliteTrainerService.swift in Sources */,
 				8DBA0BA61FD600A000A4544D /* TacxService.swift in Sources */,
 				8DBA0BB41FD600A000A4544D /* WahooTrainerSerializer.swift in Sources */,
+				8D93C1FD2006DD6700813DA2 /* KineticSerializer.swift in Sources */,
 				8DBA0BA81FD600A000A4544D /* TacxSerializer.swift in Sources */,
 				8DBA0BA41FD600A000A4544D /* WahooTrainerCharacteristic.swift in Sources */,
 				8DBA0BBC1FD600A000A4544D /* EliteTrainerSerializer.swift in Sources */,
