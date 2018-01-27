@@ -15,10 +15,9 @@ open class KineticSerializer {
     public struct KineticConfig {
         fileprivate(set) public var systemStatus: UInt16 = 0
         fileprivate(set) public var calibrationState: UInt8 = 0
+        fileprivate(set) public var spindownTime: UInt16 = 0
         fileprivate(set) public var firmwareUpdateState: UInt8 = 0
         fileprivate(set) public var bleRevision: UInt8 = 0
-        fileprivate(set) public var brakeStrength: UInt8 = 0
-        fileprivate(set) public var brakeOffset: UInt8 = 0
         fileprivate(set) public var antirattleRamp: UInt8 = 0
     }
     
@@ -27,16 +26,21 @@ open class KineticSerializer {
         fileprivate(set) public var result: UInt8 = 0
     }
     
+    public static func setDeviceName(_ deviceName: String) -> [UInt8] {
+        var bytes = deviceName.utf8.map { $0 }
+        bytes.insert(0x09, at: 0)
+        return bytes
+    }
+    
     public static func readConfig(_ data: Data) -> KineticConfig? {
         let bytes = data.map { $0 }
         if bytes.count > 7 {
             var config = KineticConfig()
             config.systemStatus = UInt16(bytes[0]) | UInt16(bytes[1]) << 8
             config.calibrationState = bytes[2]
-            config.firmwareUpdateState = bytes[3]
-            config.bleRevision = bytes[4]
-            config.brakeStrength = bytes[5]
-            config.brakeOffset = bytes[6]
+            config.spindownTime = UInt16(bytes[3]) | UInt16(bytes[4]) << 8
+            config.firmwareUpdateState = bytes[5]
+            config.bleRevision = bytes[6]
             config.antirattleRamp = bytes[7]
             return config
         }
@@ -54,9 +58,14 @@ open class KineticSerializer {
         return nil
     }
     
+    public enum KineticMode: UInt8 {
+        case erg = 0
+        case position = 1
+        case simulation = 2
+    }
     
     public struct KineticDebugData {
-        fileprivate(set) public var mode: UInt8 = 0
+        fileprivate(set) public var mode: KineticMode = .erg
         fileprivate(set) public var targetResistance: UInt16 = 0
         fileprivate(set) public var actualResistance: UInt16 = 0
         fileprivate(set) public var targetPosition: UInt16 = 0
@@ -72,7 +81,7 @@ open class KineticSerializer {
         let bytes = data.map { $0 }
         if bytes.count > 17 {
             var debugData = KineticDebugData()
-            debugData.mode = bytes[0]
+            debugData.mode = KineticMode(rawValue: bytes[0]) ?? .erg
             debugData.targetResistance = UInt16(bytes[1]) | UInt16(bytes[2]) << 8
             debugData.actualResistance = UInt16(bytes[3]) | UInt16(bytes[4]) << 8
             debugData.targetPosition = UInt16(bytes[5]) | UInt16(bytes[6]) << 8

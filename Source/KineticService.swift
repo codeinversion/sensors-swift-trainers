@@ -53,6 +53,8 @@ open class KineticService: Service, ServiceProtocol {
     open class ControlPoint: Characteristic {
         public static let uuid: String = "E9410302-B434-446B-B5CC-36592FC4C724"
         
+        public var response: KineticSerializer.KineticControlPointResponse?
+        
         required public init(service: Service, cbc: CBCharacteristic) {
             super.init(service: service, cbc: cbc)
             
@@ -61,7 +63,7 @@ open class KineticService: Service, ServiceProtocol {
         
         override open func valueUpdated() {
             if let value = cbCharacteristic.value {
-                let _ = KineticSerializer.readControlPointResponse(value)
+                response = KineticSerializer.readControlPointResponse(value)
             }
             super.valueUpdated()
         }
@@ -104,4 +106,16 @@ open class KineticService: Service, ServiceProtocol {
             super.valueUpdated()
         }
     }
+    
+    public func writeSensorName(_ deviceName: String) {
+        if let controlPoint = controlPoint {
+            do {
+                let bytes = KineticSerializer.setDeviceName(deviceName)
+                controlPoint.cbCharacteristic.write(Data(bytes: bytes), writeType: .withResponse)
+            } catch let error as NSError {
+                SensorManager.logSensorMessage?(error.localizedDescription)
+            }
+        }
+    }
+    
 }
