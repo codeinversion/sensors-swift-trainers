@@ -36,7 +36,7 @@ open class EliteTrainerSerializer {
     open static func readOutOfRangeValue(_ data: Data) -> Bool? {
         let bytes = data.map { $0 }
         if data.count > 0 {
-            if Int8(bytes[0]) == -1 {
+            if Int8(bitPattern: bytes[0]) == -1 {
                 return true
             }
             return false
