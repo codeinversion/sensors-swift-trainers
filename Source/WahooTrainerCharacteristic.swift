@@ -91,7 +91,7 @@ extension CyclingPowerService {
             }
         }
         
-        open func seSimMode(weight: Float, rollingResistanceCoefficient: Float, windResistanceCoefficient: Float) {
+        open func setSimMode(weight: Float, rollingResistanceCoefficient: Float, windResistanceCoefficient: Float) {
             ergWriteTimer?.invalidate()
             cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.seSimMode(weight: weight, rollingResistanceCoefficient: rollingResistanceCoefficient, windResistanceCoefficient: windResistanceCoefficient)), writeType: .withResponse)
         }
