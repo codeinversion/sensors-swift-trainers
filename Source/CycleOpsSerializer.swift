@@ -54,22 +54,23 @@ open class CycleOpsSerializer {
     open static func readReponse(_ data: Data) -> Response? {
         let bytes = data.map { $0 }
         var index: Int = 0
-        let _ = UInt16(bytes[index++=]) | UInt16(bytes[index++=]) << 8 //  response code
-        let commandIdRaw = UInt16(bytes[index++=]) | UInt16(bytes[index++=]) << 8
-        if commandIdRaw == 0x1000 {
-            let controlRaw = bytes[index++=]
-            let parameter1 = Int16(bytes[index++=]) | Int16(bytes[index++=]) << 8
-            let parameter2 = Int16(bytes[index++=]) | Int16(bytes[index++=]) << 8
-            let statusRaw = bytes[index++=]
-            
-            if let controlMode = CycleOpsSerializer.ControlMode(rawValue: controlRaw) {
-                if let status = CycleOpsSerializer.ControlStatus(rawValue: statusRaw) {
-                    let response = Response()
-                    response.mode = controlMode
-                    response.status = status
-                    response.parameter1 = parameter1
-                    response.parameter2 = parameter2
-                    return response
+        if bytes.count > 9 {
+            let _ = UInt16(bytes[index++=]) | UInt16(bytes[index++=]) << 8 //  response code
+            let commandIdRaw = UInt16(bytes[index++=]) | UInt16(bytes[index++=]) << 8
+            if commandIdRaw == 0x1000 {
+                let controlRaw = bytes[index++=]
+                let parameter1 = Int16(bytes[index++=]) | Int16(bytes[index++=]) << 8
+                let parameter2 = Int16(bytes[index++=]) | Int16(bytes[index++=]) << 8
+                let statusRaw = bytes[index++=]
+                if let controlMode = CycleOpsSerializer.ControlMode(rawValue: controlRaw) {
+                    if let status = CycleOpsSerializer.ControlStatus(rawValue: statusRaw) {
+                        let response = Response()
+                        response.mode = controlMode
+                        response.status = status
+                        response.parameter1 = parameter1
+                        response.parameter2 = parameter2
+                        return response
+                    }
                 }
             }
         }
