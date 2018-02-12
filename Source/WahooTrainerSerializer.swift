@@ -68,9 +68,10 @@ open class WahooTrainerSerializer {
     }
     
     open static func seSimMode(weight: Float, rollingResistanceCoefficient: Float, windResistanceCoefficient: Float) -> [UInt8] {
-        let weightN = UInt16(weight * 100)
-        let rrcN = UInt16(rollingResistanceCoefficient * 1000)
-        let wrcN = UInt16(windResistanceCoefficient * 1000)
+        // TODO: Throw Error if weight, rrc or wrc are not within "sane" values
+        let weightN = UInt16(max(0, min(65.536, weight)) * 100)
+        let rrcN = UInt16(max(0, min(65.536, rollingResistanceCoefficient)) * 1000)
+        let wrcN = UInt16(max(0, min(65.536, windResistanceCoefficient)) * 1000)
         return [
             WahooTrainerSerializer.OperationCode.setSimMode.rawValue,
             UInt8(weightN & 0xFF),
@@ -84,7 +85,8 @@ open class WahooTrainerSerializer {
     
     
     open static func setSimCRR(_ rollingResistanceCoefficient: Float) -> [UInt8] {
-        let rrcN = UInt16(rollingResistanceCoefficient * 1000)
+        // TODO: Throw Error if rrc is not within "sane" value range
+        let rrcN = UInt16(max(0, min(65.536, rollingResistanceCoefficient)) * 1000)
         return [
             WahooTrainerSerializer.OperationCode.setSimCRR.rawValue,
             UInt8(rrcN & 0xFF),
@@ -94,7 +96,8 @@ open class WahooTrainerSerializer {
     
     
     open static func setSimWindResistance(_ windResistanceCoefficient: Float) -> [UInt8] {
-        let wrcN = UInt16(windResistanceCoefficient * 1000)
+        // TODO: Throw Error if wrc is not within "sane" value range
+        let wrcN = UInt16(max(0, min(65.536, windResistanceCoefficient)) * 1000)
         return [
             WahooTrainerSerializer.OperationCode.setSimWindResistance.rawValue,
             UInt8(wrcN & 0xFF),
@@ -103,7 +106,8 @@ open class WahooTrainerSerializer {
     }
     
     open static func setSimGrade(_ grade: Float) -> [UInt8] {
-        let norm = UInt16((grade + 1.0) * 65536 / 2.0)
+        // TODO: Throw Error if grade is not between -1 and 1
+        let norm = UInt16((min(1, max(-1, grade)) + 1.0) * 65536 / 2.0)
         return [
             WahooTrainerSerializer.OperationCode.setSimGrade.rawValue,
             UInt8(norm & 0xFF),
@@ -121,7 +125,7 @@ open class WahooTrainerSerializer {
     }
     
     open static func setWheelCircumference(_ millimeters: Float) -> [UInt8] {
-        let norm = UInt16(millimeters * 10)
+        let norm = UInt16(max(0, millimeters) * 10)
         return [
             WahooTrainerSerializer.OperationCode.setWheelCircumference.rawValue,
             UInt8(norm & 0xFF),
@@ -131,24 +135,23 @@ open class WahooTrainerSerializer {
     
     open static func readReponse(_ data: Data) -> Response? {
         let bytes = data.map { $0 }
-        let result = bytes[0]   // 01 = success
-        let opCodeRaw = bytes[1]
-        if let opCode = WahooTrainerSerializer.OperationCode(rawValue: opCodeRaw) {
-            
-            let response: Response
-            
-            switch opCode {
-            default:
-                response = Response()
+        if bytes.count > 1 {
+            let result = bytes[0]   // 01 = success
+            let opCodeRaw = bytes[1]
+            if let opCode = WahooTrainerSerializer.OperationCode(rawValue: opCodeRaw) {
+                let response: Response
+                switch opCode {
+                default:
+                    response = Response()
+                }
+                response.operationCode = opCode
+                return response
+            } else {
+                SensorManager.logSensorMessage?("Unrecognized Operation Code: \(opCodeRaw)")
             }
-            
-            response.operationCode = opCode
-            return response
-        } else {
-            SensorManager.logSensorMessage?("Unrecognized Operation Code: \(opCodeRaw)")
-        }
-        if result == 1 {
-            SensorManager.logSensorMessage?("Success for operation: \(opCodeRaw)")
+            if result == 1 {
+                SensorManager.logSensorMessage?("Success for operation: \(opCodeRaw)")
+            }
         }
         
         return nil

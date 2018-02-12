@@ -26,10 +26,10 @@ open class EliteTrainerSerializer {
     
     open static func setSimulationMode(_ grade: Double, crr: Double, wrc: Double, windSpeedKPH: Double = 0, draftingFactor: Double = 1) -> [UInt8] {
         let gradeN = UInt16(((grade * 100) + 200) * 100)
-        let crrN = UInt8(crr / 0.00005)
-        let wrcN = UInt8(wrc / 0.01)
+        let crrN = UInt8(Int(crr / 0.00005) & 0xFF)
+        let wrcN = UInt8(Int(wrc / 0.01) & 0xFF)
         let windSpeed = UInt8(max(-127, min(windSpeedKPH, 128)) + 127)
-        let draftN = UInt8(draftingFactor / 0.01)
+        let draftN = UInt8(Int(draftingFactor / 0.01) & 0xFF)
         return [0x02, UInt8(gradeN & 0xFF), UInt8(gradeN >> 8 & 0xFF), crrN, wrcN, windSpeed, draftN]
     }
     
