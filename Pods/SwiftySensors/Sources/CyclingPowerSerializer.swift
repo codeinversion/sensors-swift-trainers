@@ -83,7 +83,10 @@ open class CyclingPowerSerializer {
     
     open static func readFeatures(_ data: Data) -> Features {
         let bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
-        let rawFeatures: UInt32 = ((UInt32)(bytes[0])) | ((UInt32)(bytes[1])) << 8 | ((UInt32)(bytes[2])) << 16 | ((UInt32)(bytes[3])) << 24
+        var rawFeatures: UInt32 = ((UInt32)(bytes[0]))
+        rawFeatures |= ((UInt32)(bytes[1])) << 8
+        rawFeatures |= ((UInt32)(bytes[2])) << 16
+        rawFeatures |= ((UInt32)(bytes[3])) << 24
         return Features(rawValue: rawFeatures)
     }
     
@@ -108,7 +111,11 @@ open class CyclingPowerSerializer {
         }
         
         if flags.contains(.WheelRevolutionDataPresent) {
-            measurement.cumulativeWheelRevolutions = ((UInt32)(bytes[index++=])) | ((UInt32)(bytes[index++=])) << 8 | ((UInt32)(bytes[index++=])) << 16 | ((UInt32)(bytes[index++=])) << 24
+            var cumulativeWheelRevolutions = ((UInt32)(bytes[index++=]))
+            cumulativeWheelRevolutions |= ((UInt32)(bytes[index++=])) << 8
+            cumulativeWheelRevolutions |= ((UInt32)(bytes[index++=])) << 16
+            cumulativeWheelRevolutions |= ((UInt32)(bytes[index++=])) << 24
+            measurement.cumulativeWheelRevolutions = cumulativeWheelRevolutions
             measurement.lastWheelEventTime = ((UInt16)(bytes[index++=])) | ((UInt16)(bytes[index++=])) << 8
         }
         

@@ -82,7 +82,7 @@ open class CyclingSerializer {
         return 0
     }
     
-    private static func deltaWithRollover<T: Integer>(_ new: T, old: T, max: T) -> T {
+    private static func deltaWithRollover<T: BinaryInteger>(_ new: T, old: T, max: T) -> T {
         return old > new ? max - old + new : new - old
     }
     

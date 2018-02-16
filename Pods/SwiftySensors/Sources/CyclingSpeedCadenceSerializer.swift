@@ -60,7 +60,11 @@ open class CyclingSpeedCadenceSerializer {
         let flags = MeasurementFlags(rawValue: rawFlags)
         
         if flags.contains(.WheelRevolutionDataPresent) {
-            measurement.cumulativeWheelRevolutions = ((UInt32)(bytes[index++=])) | ((UInt32)(bytes[index++=])) << 8 | ((UInt32)(bytes[index++=])) << 16 | ((UInt32)(bytes[index++=])) << 24
+            var cumulativeWheelRevolutions = ((UInt32)(bytes[index++=]))
+            cumulativeWheelRevolutions |= ((UInt32)(bytes[index++=])) << 8
+            cumulativeWheelRevolutions |= ((UInt32)(bytes[index++=])) << 16
+            cumulativeWheelRevolutions |= ((UInt32)(bytes[index++=])) << 24
+            measurement.cumulativeWheelRevolutions = cumulativeWheelRevolutions
             measurement.lastWheelEventTime = ((UInt16)(bytes[index++=])) | ((UInt16)(bytes[index++=])) << 8
         }
         

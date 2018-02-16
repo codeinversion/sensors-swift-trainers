@@ -21,8 +21,8 @@ open class JetBlackService: Service, ServiceProtocol {
         FastChange.uuid:    FastChange.self
     ]
     
-    public var slowChange: SlowChange? { return characteristic() }
-    public var fastChange: FastChange? { return characteristic() }
+    public var slowChange: SlowChange? { return characteristic(SlowChange.uuid) }
+    public var fastChange: FastChange? { return characteristic(FastChange.uuid) }
     
     open class SlowChange: Characteristic {
         
@@ -40,7 +40,7 @@ open class JetBlackService: Service, ServiceProtocol {
         
         override open func valueUpdated() {
             if let value = cbCharacteristic.value {
-               data = JetBlackSerializer.readSlowChange(value)
+                data = JetBlackSerializer.readSlowChange(value)
             }
             super.valueUpdated()
         }
@@ -69,21 +69,26 @@ open class JetBlackService: Service, ServiceProtocol {
         
     }
     
-    
-    open func setTargetPower(_ watts: UInt16) {
-        slowChange?.cbCharacteristic.write(Data(bytes: JetBlackSerializer.setTargetPower(watts)), writeType: SlowChange.writeType)
+    @discardableResult open func setTargetPower(_ watts: UInt16) -> [UInt8] {
+        let bytes = JetBlackSerializer.setTargetPower(watts)
+        slowChange?.cbCharacteristic.write(Data(bytes: bytes), writeType: SlowChange.writeType)
+        return bytes
     }
     
-    open func setRiderWeight(_ weight: UInt16) {
-        slowChange?.cbCharacteristic.write(Data(bytes: JetBlackSerializer.setRiderWeight(weight)), writeType: SlowChange.writeType)
-        
+    @discardableResult open func setRiderWeight(_ weight: UInt16) -> [UInt8] {
+        let bytes = JetBlackSerializer.setRiderWeight(weight)
+        slowChange?.cbCharacteristic.write(Data(bytes: bytes), writeType: SlowChange.writeType)
+        return bytes
     }
     
-    open func setSimulationParameters(rollingResistance: Float, windResistance: Float, grade: Float, windSpeed: Float, draftingFactor: Float) {
-        fastChange?.cbCharacteristic.write(Data(bytes: JetBlackSerializer.setSimulationParameters(rollingResistance: rollingResistance,
-                                                                                                  windResistance: windResistance,
-                                                                                                  grade: grade,
-                                                                                                  windSpeed: windSpeed,
-                                                                                                  draftingFactor: draftingFactor)), writeType: FastChange.writeType)
+    @discardableResult open func setSimulationParameters(rollingResistance: Float, windResistance: Float, grade: Float, windSpeed: Float, draftingFactor: Float) -> [UInt8] {
+        let bytes = JetBlackSerializer.setSimulationParameters(rollingResistance: rollingResistance,
+                                                               windResistance: windResistance,
+                                                               grade: grade,
+                                                               windSpeed: windSpeed,
+                                                               draftingFactor: draftingFactor)
+        fastChange?.cbCharacteristic.write(Data(bytes: bytes), writeType: FastChange.writeType)
+        return bytes
     }
 }
+

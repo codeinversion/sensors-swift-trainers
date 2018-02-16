@@ -167,10 +167,10 @@ public class SensorManager: NSObject {
     internal class ServiceFactory {
         fileprivate(set) var serviceTypes = Dictionary<String, Service.Type>()
         
-        var serviceUUIDs: [CBUUID] {
-            return serviceTypes.keys.map { uuid in
+        var serviceUUIDs: [CBUUID]? {
+            return serviceTypes.count > 0 ? serviceTypes.keys.map { uuid in
                 return CBUUID(string: uuid)
-            }
+            } : nil
         }
         
         var servicesToDiscover: [CBUUID] = []
@@ -239,7 +239,7 @@ extension SensorManager {
     }
     
     
-    func rssiUpateTimerHandler(_ timer: Timer) {
+    @objc func rssiUpateTimerHandler(_ timer: Timer) {
         let now = Date.timeIntervalSinceReferenceDate
         for sensor in sensors {
             if now - sensor.lastSensorActivity > SensorManager.InactiveInterval {

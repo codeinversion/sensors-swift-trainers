@@ -17,11 +17,14 @@ open class EliteTrainerService: Service, ServiceProtocol {
     public static var uuid: String { return "347B0001-7635-408B-8918-8FF3949CE592" }
     
     public static var characteristicTypes: Dictionary<String, Characteristic.Type> = [
-        ControlPoint.uuid:  ControlPoint.self,
-        OutOfRange.uuid:    OutOfRange.self
+        ControlPoint.uuid:          ControlPoint.self,
+        OutOfRange.uuid:            OutOfRange.self,
+        SystemWeight.uuid:          SystemWeight.self,
+        TrainerCapabilities.uuid:   TrainerCapabilities.self
     ]
     
     public var controlPoint: ControlPoint? { return characteristic() }
+    public var systemWeight: SystemWeight? { return characteristic() }
     
     open class ControlPoint: Characteristic {
         
@@ -60,13 +63,52 @@ open class EliteTrainerService: Service, ServiceProtocol {
         
     }
 
-    
-    open func setTargetPower(_ watts: UInt16) {
-        controlPoint?.cbCharacteristic.write(Data(bytes: EliteTrainerSerializer.setTargetPower(watts)), writeType: ControlPoint.writeType)
+    open class SystemWeight: Characteristic {
+        
+        public static var uuid: String { return "347B0018-7635-408B-8918-8FF3949CE592" }
+        
+        public static let writeType = CBCharacteristicWriteType.withResponse
+        
+        required public init(service: Service, cbc: CBCharacteristic) {
+            super.init(service: service, cbc: cbc)
+        }
     }
     
-    open func setBrakeLevel(_ level: Double) {
-        controlPoint?.cbCharacteristic.write(Data(bytes: EliteTrainerSerializer.setBrakeLevel(level)), writeType: ControlPoint.writeType)
+    open class TrainerCapabilities: Characteristic {
+        
+        public static var uuid: String { return "347B0019-7635-408B-8918-8FF3949CE592" }
+        
+        public static let writeType = CBCharacteristicWriteType.withResponse
+        
+        required public init(service: Service, cbc: CBCharacteristic) {
+            super.init(service: service, cbc: cbc)
+        }
+    }
+    
+    
+    
+    @discardableResult open func setTargetPower(_ watts: UInt16) -> [UInt8] {
+        let bytes = EliteTrainerSerializer.setTargetPower(watts)
+        controlPoint?.cbCharacteristic.write(Data(bytes: bytes), writeType: ControlPoint.writeType)
+        return bytes
+    }
+    
+    @discardableResult open func setBrakeLevel(_ level: Double) -> [UInt8] {
+        let bytes = EliteTrainerSerializer.setBrakeLevel(level)
+        controlPoint?.cbCharacteristic.write(Data(bytes: bytes), writeType: ControlPoint.writeType)
+        return bytes
+    }
+    
+    @discardableResult open func setSimulationMode(_ grade: Double, crr: Double, wrc: Double, windSpeedKPH: Double = 0, draftingFactor: Double = 1) -> [UInt8] {
+        let bytes = EliteTrainerSerializer.setSimulationMode(grade, crr: crr, wrc: wrc, windSpeedKPH: windSpeedKPH, draftingFactor: draftingFactor)
+        controlPoint?.cbCharacteristic.write(Data(bytes: bytes), writeType: ControlPoint.writeType)
+        return bytes
+    }
+    
+    @discardableResult open func setRiderWeight(_ riderKG: UInt8, bikeKG: UInt8) -> [UInt8] {
+        let bytes = [riderKG, bikeKG]
+        systemWeight?.cbCharacteristic.write(Data(bytes: bytes), writeType: SystemWeight.writeType)
+        return bytes
     }
     
 }
