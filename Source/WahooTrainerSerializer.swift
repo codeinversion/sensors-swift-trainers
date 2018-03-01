@@ -68,10 +68,11 @@ open class WahooTrainerSerializer {
     }
     
     open static func seSimMode(weight: Float, rollingResistanceCoefficient: Float, windResistanceCoefficient: Float) -> [UInt8] {
+        // Weight units are Kg
         // TODO: Throw Error if weight, rrc or wrc are not within "sane" values
-        let weightN = UInt16(max(0, min(65.536, weight)) * 100)
-        let rrcN = UInt16(max(0, min(65.536, rollingResistanceCoefficient)) * 1000)
-        let wrcN = UInt16(max(0, min(65.536, windResistanceCoefficient)) * 1000)
+        let weightN = UInt16(max(0, min(655.35, weight)) * 100)
+        let rrcN = UInt16(max(0, min(65.535, rollingResistanceCoefficient)) * 1000)
+        let wrcN = UInt16(max(0, min(65.535, windResistanceCoefficient)) * 1000)
         return [
             WahooTrainerSerializer.OperationCode.setSimMode.rawValue,
             UInt8(weightN & 0xFF),
@@ -83,10 +84,9 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    
     open static func setSimCRR(_ rollingResistanceCoefficient: Float) -> [UInt8] {
         // TODO: Throw Error if rrc is not within "sane" value range
-        let rrcN = UInt16(max(0, min(65.536, rollingResistanceCoefficient)) * 1000)
+        let rrcN = UInt16(max(0, min(65.535, rollingResistanceCoefficient)) * 1000)
         return [
             WahooTrainerSerializer.OperationCode.setSimCRR.rawValue,
             UInt8(rrcN & 0xFF),
@@ -94,10 +94,9 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    
     open static func setSimWindResistance(_ windResistanceCoefficient: Float) -> [UInt8] {
         // TODO: Throw Error if wrc is not within "sane" value range
-        let wrcN = UInt16(max(0, min(65.536, windResistanceCoefficient)) * 1000)
+        let wrcN = UInt16(max(0, min(65.535, windResistanceCoefficient)) * 1000)
         return [
             WahooTrainerSerializer.OperationCode.setSimWindResistance.rawValue,
             UInt8(wrcN & 0xFF),
@@ -107,7 +106,7 @@ open class WahooTrainerSerializer {
     
     open static func setSimGrade(_ grade: Float) -> [UInt8] {
         // TODO: Throw Error if grade is not between -1 and 1
-        let norm = UInt16((min(1, max(-1, grade)) + 1.0) * 65536 / 2.0)
+        let norm = UInt16((min(1, max(-1, grade)) + 1.0) * 65535 / 2.0)
         return [
             WahooTrainerSerializer.OperationCode.setSimGrade.rawValue,
             UInt8(norm & 0xFF),
@@ -116,7 +115,7 @@ open class WahooTrainerSerializer {
     }
     
     open static func setSimWindSpeed(_ metersPerSecond: Float) -> [UInt8] {
-        let norm = UInt16((max(-32.768, min(32.768, metersPerSecond)) + 32.768) * 1000)
+        let norm = UInt16((max(-32.767, min(32.767, metersPerSecond)) + 32.767) * 1000)
         return [
             WahooTrainerSerializer.OperationCode.setSimWindSpeed.rawValue,
             UInt8(norm & 0xFF),
@@ -153,8 +152,6 @@ open class WahooTrainerSerializer {
                 SensorManager.logSensorMessage?("Success for operation: \(opCodeRaw)")
             }
         }
-        
         return nil
     }
-    
 }
