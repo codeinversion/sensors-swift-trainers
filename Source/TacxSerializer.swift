@@ -13,9 +13,9 @@ import Foundation
 open class TacxSerializer {
     
     public struct FECPacket {
-        let type: FECPacketType
-        let channel: UInt8
-        let message: Data
+        public let type: FECPacketType
+        public let channel: UInt8
+        public let message: Data
     }
     
     public enum FECPacketType: UInt8 {
@@ -55,10 +55,10 @@ open class TacxSerializer {
                 for i in 0 ..< packetLength - 1 {
                     packetXOR ^= bytes[i]
                 }
-                if checksum == packetXOR, let type = FECPacketType(rawValue: bytes[2]) {
+                if checksum == packetXOR, let type = FECPacketType(rawValue: bytes[4]) {
                     let channel = bytes[3]
                     let messageLength = Int(bytes[1])
-                    let message = data.subdata(in: Range(uncheckedBounds: (4, messageLength)))
+                    let message = data.subdata(in: Range(uncheckedBounds: (4, 4 + messageLength)))
                     return FECPacket(type: type, channel: channel, message: message)
                 }
             }
@@ -120,7 +120,7 @@ open class TacxSerializer {
     }
     
     public static func sendTargetPower(_ watts: Int16) -> [UInt8] {
-        let target = Int16(Double(watts) * 0.25)    // ???
+        let target = Int16(Double(watts) * 4)    // ???
         let message: [UInt8] = [
             DefaultChannel,
             FECPacketType.targetPower.rawValue,

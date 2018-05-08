@@ -109,13 +109,8 @@ open class KineticService: Service, ServiceProtocol {
     
     public func writeSensorName(_ deviceName: String) {
         if let controlPoint = controlPoint {
-            do {
-                let bytes = KineticSerializer.setDeviceName(deviceName)
-                controlPoint.cbCharacteristic.write(Data(bytes: bytes), writeType: .withResponse)
-            } catch let error as NSError {
-                SensorManager.logSensorMessage?(error.localizedDescription)
-            }
+            let bytes = KineticSerializer.setDeviceName(deviceName)
+            controlPoint.cbCharacteristic.write(Data(bytes: bytes), writeType: .withResponse)
         }
     }
-    
 }
