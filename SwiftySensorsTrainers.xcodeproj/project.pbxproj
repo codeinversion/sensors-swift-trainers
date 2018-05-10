@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		27FE375F1E5DD9D759F2EC9A /* Pods_SwiftySensorsTrainers_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FDEA13933EF5C6EBCC4156A /* Pods_SwiftySensorsTrainers_iOS.framework */; };
+		331F28DD20A3897D009EFC98 /* WahooAdvancedFitnessMachineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331F28DC20A3897D009EFC98 /* WahooAdvancedFitnessMachineService.swift */; };
+		331F28DF20A39D81009EFC98 /* WahooAdvancedFitnessMachineSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331F28DE20A39D81009EFC98 /* WahooAdvancedFitnessMachineSerializer.swift */; };
 		8D0B37661FE18D870073A7F7 /* CycleOpsSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA0B9A1FD600A000A4544D /* CycleOpsSerializer.swift */; };
 		8D0B37671FE18D870073A7F7 /* JetBlackSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA0B941FD600A000A4544D /* JetBlackSerializer.swift */; };
 		8D0B37681FE18D870073A7F7 /* SmartControlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA0B9B1FD600A000A4544D /* SmartControlService.swift */; };
@@ -73,6 +75,8 @@
 		18FD1A88422D06F1BE87FD30 /* Pods-SwiftySensorsTrainers tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftySensorsTrainers tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftySensorsTrainers tvOS/Pods-SwiftySensorsTrainers tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		1FDEA13933EF5C6EBCC4156A /* Pods_SwiftySensorsTrainers_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftySensorsTrainers_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3013A1979BE7584793F4EE20 /* Pods-SwiftySensorsTrainers macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftySensorsTrainers macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftySensorsTrainers macOS/Pods-SwiftySensorsTrainers macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		331F28DC20A3897D009EFC98 /* WahooAdvancedFitnessMachineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WahooAdvancedFitnessMachineService.swift; sourceTree = "<group>"; };
+		331F28DE20A39D81009EFC98 /* WahooAdvancedFitnessMachineSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WahooAdvancedFitnessMachineSerializer.swift; sourceTree = "<group>"; };
 		3D9BE0950CAD962084823F4D /* Pods-SwiftySensorsTrainers tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftySensorsTrainers tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftySensorsTrainers tvOS/Pods-SwiftySensorsTrainers tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		616384F1969A6B96ADBF7FE2 /* Pods_SwiftySensorsTrainers_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftySensorsTrainers_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0B377E1FE18D870073A7F7 /* SwiftySensorsTrainers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySensorsTrainers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +215,8 @@
 				8DBA0B971FD600A000A4544D /* TacxSerializer.swift */,
 				8DBA0B951FD600A000A4544D /* WahooTrainerCharacteristic.swift */,
 				8DBA0B9D1FD600A000A4544D /* WahooTrainerSerializer.swift */,
+				331F28DC20A3897D009EFC98 /* WahooAdvancedFitnessMachineService.swift */,
+				331F28DE20A39D81009EFC98 /* WahooAdvancedFitnessMachineSerializer.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -541,9 +547,11 @@
 				8DBA0BB01FD600A000A4544D /* SmartControlService.swift in Sources */,
 				8D93C1FE2006DD6700813DA2 /* KineticService.swift in Sources */,
 				8DBA0BB21FD600A000A4544D /* EliteTrainerService.swift in Sources */,
+				331F28DF20A39D81009EFC98 /* WahooAdvancedFitnessMachineSerializer.swift in Sources */,
 				8DBA0BA61FD600A000A4544D /* TacxService.swift in Sources */,
 				8DBA0BB41FD600A000A4544D /* WahooTrainerSerializer.swift in Sources */,
 				8D93C1FD2006DD6700813DA2 /* KineticSerializer.swift in Sources */,
+				331F28DD20A3897D009EFC98 /* WahooAdvancedFitnessMachineService.swift in Sources */,
 				8DBA0BA81FD600A000A4544D /* TacxSerializer.swift in Sources */,
 				8DBA0BA41FD600A000A4544D /* WahooTrainerCharacteristic.swift in Sources */,
 				8DBA0BBC1FD600A000A4544D /* EliteTrainerSerializer.swift in Sources */,
