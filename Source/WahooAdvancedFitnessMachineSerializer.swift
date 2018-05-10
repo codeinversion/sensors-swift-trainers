@@ -8,6 +8,12 @@
 
 import Foundation
 
+func decodeTilt(lsb: UInt8, msb: UInt8) -> Double {
+    let unsignedValue = UInt16(msb) << 8 | UInt16(lsb)
+    let signedValue = Int16(bitPattern: unsignedValue)
+    return Double(signedValue) / 100
+}
+
 open class WahooAdvancedFitnessMachineSerializer {
     public enum OpCode: UInt8 {
         case getHubHeight = 1
@@ -139,7 +145,7 @@ open class WahooAdvancedFitnessMachineSerializer {
         
         public var targetTilt: Double? {
             if eventCode == .targetTiltChanged && bytes.count >= 2 {
-                return Double(UInt16(bytes[1]) << 8 | UInt16(bytes[0])) / 100
+                return decodeTilt(lsb: bytes[0], msb: bytes[1])
             }
             return nil
         }
@@ -153,21 +159,21 @@ open class WahooAdvancedFitnessMachineSerializer {
         
         public var currentTilt: Double? {
             if eventCode == .currentTiltChanged && bytes.count >= 2 {
-                return Double(UInt16(bytes[1]) << 8 | UInt16(bytes[0])) / 100
+                return decodeTilt(lsb: bytes[0], msb: bytes[1])
             }
             return nil
         }
         
         public var minimumTilt: Double? {
             if [EventCode.tiltLimitsAvailable, .tiltLimitsChanged].contains(eventCode) && bytes.count >= 2 {
-                return Double(UInt16(bytes[1]) << 8 | UInt16(bytes[0])) / 100
+                return decodeTilt(lsb: bytes[0], msb: bytes[1])
             }
             return nil
         }
         
         public var maximumTilt: Double? {
             if [EventCode.tiltLimitsAvailable, .tiltLimitsChanged].contains(eventCode) && bytes.count >= 4 {
-                return Double(UInt16(bytes[3]) << 8 | UInt16(bytes[2])) / 100
+                return decodeTilt(lsb: bytes[0], msb: bytes[1])
             }
             return nil
         }
@@ -202,7 +208,7 @@ open class WahooAdvancedFitnessMachineSerializer {
     }
     
     public static func setTargetTilt(grade: Double) -> CommandPacket {
-        let targetTilt = UInt16(grade * 100)
+        let targetTilt = UInt16(bitPattern: Int16(grade * 100))
         let data = [
             UInt8(targetTilt & 0xFF),
             UInt8(targetTilt >> 8 & 0xFF)
