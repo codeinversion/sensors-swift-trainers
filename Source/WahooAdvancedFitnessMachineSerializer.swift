@@ -57,7 +57,7 @@ open class WahooAdvancedFitnessMachineSerializer {
         public let opCode: OpCode
         public let message: [UInt8]
         
-        public var bytes: [UInt8] { return [opCode.rawValue] + data }
+        public var bytes: [UInt8] { return [opCode.rawValue] + message }
         
         public var data: Data { return Data(bytes) }
     }
@@ -68,7 +68,7 @@ open class WahooAdvancedFitnessMachineSerializer {
         public let bytes: [UInt8]
 
         public static func parse(packet: [UInt8]) -> ResponsePacket? {
-            if packet.count < 3 || packet[0] == OpCode.responsePacket.rawValue {
+            if packet.count < 3 || packet[0] != OpCode.responsePacket.rawValue {
                 return nil
             }
             guard let opCode = OpCode.init(rawValue: packet[1]), let responseCode = ResponseCode.init(rawValue: packet[2]) else {
@@ -119,7 +119,7 @@ open class WahooAdvancedFitnessMachineSerializer {
         public let bytes: [UInt8]
         
         public static func parse(packet: [UInt8]) -> EventPacket? {
-            if packet.count < 2 || packet[0] == OpCode.eventPacket.rawValue {
+            if packet.count < 2 || packet[0] != OpCode.eventPacket.rawValue {
                 return nil
             }
             guard let eventCode = EventCode.init(rawValue: packet[1]) else {
