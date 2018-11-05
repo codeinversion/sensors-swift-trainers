@@ -34,7 +34,7 @@ open class WahooTrainerSerializer {
         case setWheelCircumference      = 72
     }
     
-    open static func unlockCommand() -> [UInt8] {
+    public static func unlockCommand() -> [UInt8] {
         return [
             WahooTrainerSerializer.OperationCode.unlock.rawValue,
             0xee,   // unlock code
@@ -42,7 +42,7 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    open static func setResistanceMode(_ resistance: Float) -> [UInt8] {
+    public static func setResistanceMode(_ resistance: Float) -> [UInt8] {
         let norm = UInt16((1 - resistance) * 16383)
         return [
             WahooTrainerSerializer.OperationCode.setResistanceMode.rawValue,
@@ -51,14 +51,14 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    open static func setStandardMode(level: UInt8) -> [UInt8] {
+    public static func setStandardMode(level: UInt8) -> [UInt8] {
         return [
             WahooTrainerSerializer.OperationCode.setStandardMode.rawValue,
             level
         ]
     }
     
-    open static func seErgMode(_ watts: UInt16) -> [UInt8] {
+    public static func seErgMode(_ watts: UInt16) -> [UInt8] {
         return [
             WahooTrainerSerializer.OperationCode.setErgMode.rawValue,
             UInt8(watts & 0xFF),
@@ -67,7 +67,7 @@ open class WahooTrainerSerializer {
         // response: 0x01 0x42 0x01 0x00 watts1 watts2
     }
     
-    open static func seSimMode(weight: Float, rollingResistanceCoefficient: Float, windResistanceCoefficient: Float) -> [UInt8] {
+    public static func seSimMode(weight: Float, rollingResistanceCoefficient: Float, windResistanceCoefficient: Float) -> [UInt8] {
         // Weight units are Kg
         // TODO: Throw Error if weight, rrc or wrc are not within "sane" values
         let weightN = UInt16(max(0, min(655.35, weight)) * 100)
@@ -84,7 +84,7 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    open static func setSimCRR(_ rollingResistanceCoefficient: Float) -> [UInt8] {
+    public static func setSimCRR(_ rollingResistanceCoefficient: Float) -> [UInt8] {
         // TODO: Throw Error if rrc is not within "sane" value range
         let rrcN = UInt16(max(0, min(65.535, rollingResistanceCoefficient)) * 1000)
         return [
@@ -94,7 +94,7 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    open static func setSimWindResistance(_ windResistanceCoefficient: Float) -> [UInt8] {
+    public static func setSimWindResistance(_ windResistanceCoefficient: Float) -> [UInt8] {
         // TODO: Throw Error if wrc is not within "sane" value range
         let wrcN = UInt16(max(0, min(65.535, windResistanceCoefficient)) * 1000)
         return [
@@ -104,7 +104,7 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    open static func setSimGrade(_ grade: Float) -> [UInt8] {
+    public static func setSimGrade(_ grade: Float) -> [UInt8] {
         // TODO: Throw Error if grade is not between -1 and 1
         let norm = UInt16((min(1, max(-1, grade)) + 1.0) * 65535 / 2.0)
         return [
@@ -114,7 +114,7 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    open static func setSimWindSpeed(_ metersPerSecond: Float) -> [UInt8] {
+    public static func setSimWindSpeed(_ metersPerSecond: Float) -> [UInt8] {
         let norm = UInt16((max(-32.767, min(32.767, metersPerSecond)) + 32.767) * 1000)
         return [
             WahooTrainerSerializer.OperationCode.setSimWindSpeed.rawValue,
@@ -123,7 +123,7 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    open static func setWheelCircumference(_ millimeters: Float) -> [UInt8] {
+    public static func setWheelCircumference(_ millimeters: Float) -> [UInt8] {
         let norm = UInt16(max(0, millimeters) * 10)
         return [
             WahooTrainerSerializer.OperationCode.setWheelCircumference.rawValue,
@@ -132,7 +132,7 @@ open class WahooTrainerSerializer {
         ]
     }
     
-    open static func readReponse(_ data: Data) -> Response? {
+    public static func readReponse(_ data: Data) -> Response? {
         let bytes = data.map { $0 }
         if bytes.count > 1 {
             let result = bytes[0]   // 01 = success

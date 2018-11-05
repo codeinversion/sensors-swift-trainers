@@ -1,7 +1,7 @@
 {
   "name": "SwiftySensors",
-  "version": "0.5.0",
-  "summary": "BLE Fitness Sensors Communication Utilities for iOS and OSX",
+  "version": "0.6.1",
+  "summary": "BLE Fitness Sensors Communication Utilities for iOS, macOS and tvOS",
   "homepage": "https://github.com/kinetic-fit/sensors-swift",
   "license": {
     "type": "MIT",
@@ -11,13 +11,13 @@
     "Kinetic": "admin@kinetic.fit"
   },
   "platforms": {
-    "ios": "8.2",
+    "ios": "8.4",
     "osx": "10.13",
     "tvos": "11.2"
   },
   "source": {
     "git": "https://github.com/kinetic-fit/sensors-swift.git",
-    "tag": "0.5.0",
+    "tag": "0.6.1",
     "submodules": true
   },
   "source_files": "Sources/**/*.swift",

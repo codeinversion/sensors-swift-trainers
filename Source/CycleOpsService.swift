@@ -96,7 +96,7 @@ open class CycleOpsService: Service, ServiceProtocol {
         if updateTargetWattTimer == nil || !updateTargetWattTimer!.isValid {
             writeTargetWatts()
             updateTargetWattTimer = Timer(timeInterval: MinimumWriteInterval, target: self, selector: #selector(writeTargetWatts(_:)), userInfo: nil, repeats: true)
-            RunLoop.main.add(updateTargetWattTimer!, forMode: .commonModes)
+            RunLoop.main.add(updateTargetWattTimer!, forMode: .common)
         }
     }
     

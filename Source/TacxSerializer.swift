@@ -44,7 +44,7 @@ open class TacxSerializer {
 //        public var spinDownTimeResponseSeconds
     }
     
-    open static func identifyPacket(_ data: Data) -> FECPacket? {
+    public static func identifyPacket(_ data: Data) -> FECPacket? {
         let bytes = data.map { $0 }
         
         let packetLength = data.count
@@ -66,7 +66,7 @@ open class TacxSerializer {
         return nil
     }
     
-    open static func readCalibrationCommand(_ data: Data) -> CalibrationResult {
+    public static func readCalibrationCommand(_ data: Data) -> CalibrationResult {
         let bytes = data.map { $0 }
         
         var result = CalibrationResult()

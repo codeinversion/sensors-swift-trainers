@@ -87,7 +87,7 @@ extension CyclingPowerService {
             if ergWriteTimer == nil || !ergWriteTimer!.isValid {
                 writeErgWatts()
                 ergWriteTimer = Timer(timeInterval: ErgWriteDelay, target: self, selector: #selector(writeErgWatts(_:)), userInfo: nil, repeats: true)
-                RunLoop.main.add(ergWriteTimer!, forMode: .commonModes)
+                RunLoop.main.add(ergWriteTimer!, forMode: .common)
             }
         }
         
