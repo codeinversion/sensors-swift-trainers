@@ -164,25 +164,25 @@ open class TacxService: Service, ServiceProtocol {
     
     @discardableResult open func sendWindResistance(crwKgM: Double, windSpeedKPH: Double, draftingFactor: Double) -> [UInt8] {
         let bytes = TacxSerializer.sendWindResistance(crwKgM, windSpeedKPH: windSpeedKPH, draftingFactor: draftingFactor)
-        write?.cbCharacteristic.write(Data(bytes: bytes), writeType: .withResponse)
+        write?.cbCharacteristic.write(Data(bytes), writeType: .withResponse)
         return bytes
     }
     
     @discardableResult open func sendTrackResistance(grade: Double, crr: Double) -> [UInt8] {
         let bytes = TacxSerializer.sendTrackResistance(grade, crr: crr)
-        write?.cbCharacteristic.write(Data(bytes: bytes), writeType: .withResponse)
+        write?.cbCharacteristic.write(Data(bytes), writeType: .withResponse)
         return bytes
     }
     
     @discardableResult open func sendTargetPower(watts: Int16) -> [UInt8] {
         let bytes = TacxSerializer.sendTargetPower(watts)
-        write?.cbCharacteristic.write(Data(bytes: bytes), writeType: .withResponse)
+        write?.cbCharacteristic.write(Data(bytes), writeType: .withResponse)
         return bytes
     }
     
     @discardableResult open func sendBasicResistance(percent: Double) -> [UInt8] {
         let bytes = TacxSerializer.sendBasicResistance(percent)
-        write?.cbCharacteristic.write(Data(bytes: bytes), writeType: .withResponse)
+        write?.cbCharacteristic.write(Data(bytes), writeType: .withResponse)
         return bytes
     }
     

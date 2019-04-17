@@ -89,25 +89,25 @@ open class EliteTrainerService: Service, ServiceProtocol {
     
     @discardableResult open func setTargetPower(_ watts: UInt16) -> [UInt8] {
         let bytes = EliteTrainerSerializer.setTargetPower(watts)
-        controlPoint?.cbCharacteristic.write(Data(bytes: bytes), writeType: ControlPoint.writeType)
+        controlPoint?.cbCharacteristic.write(Data(bytes), writeType: ControlPoint.writeType)
         return bytes
     }
     
     @discardableResult open func setBrakeLevel(_ level: Double) -> [UInt8] {
         let bytes = EliteTrainerSerializer.setBrakeLevel(level)
-        controlPoint?.cbCharacteristic.write(Data(bytes: bytes), writeType: ControlPoint.writeType)
+        controlPoint?.cbCharacteristic.write(Data(bytes), writeType: ControlPoint.writeType)
         return bytes
     }
     
     @discardableResult open func setSimulationMode(_ grade: Double, crr: Double, wrc: Double, windSpeedKPH: Double = 0, draftingFactor: Double = 1) -> [UInt8] {
         let bytes = EliteTrainerSerializer.setSimulationMode(grade, crr: crr, wrc: wrc, windSpeedKPH: windSpeedKPH, draftingFactor: draftingFactor)
-        controlPoint?.cbCharacteristic.write(Data(bytes: bytes), writeType: ControlPoint.writeType)
+        controlPoint?.cbCharacteristic.write(Data(bytes), writeType: ControlPoint.writeType)
         return bytes
     }
     
     @discardableResult open func setRiderWeight(_ riderKG: UInt8, bikeKG: UInt8) -> [UInt8] {
         let bytes = [riderKG, bikeKG]
-        systemWeight?.cbCharacteristic.write(Data(bytes: bytes), writeType: SystemWeight.writeType)
+        systemWeight?.cbCharacteristic.write(Data(bytes), writeType: SystemWeight.writeType)
         return bytes
     }
     

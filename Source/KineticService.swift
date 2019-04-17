@@ -110,7 +110,7 @@ open class KineticService: Service, ServiceProtocol {
     public func writeSensorName(_ deviceName: String) {
         if let controlPoint = controlPoint {
             let bytes = KineticSerializer.setDeviceName(deviceName)
-            controlPoint.cbCharacteristic.write(Data(bytes: bytes), writeType: .withResponse)
+            controlPoint.cbCharacteristic.write(Data(bytes), writeType: .withResponse)
         }
     }
 }

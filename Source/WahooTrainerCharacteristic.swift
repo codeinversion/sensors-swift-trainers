@@ -43,7 +43,7 @@ extension CyclingPowerService {
             cbCharacteristic.notify(true)
             
             // Wahoo Trainers have to be "unlocked" before they will respond to messages
-            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.unlockCommand()), writeType: .withResponse)
+            cbCharacteristic.write(Data(WahooTrainerSerializer.unlockCommand()), writeType: .withResponse)
             
             service.sensor.onStateChanged.subscribe(with: self) { [weak self] sensor in
                 if sensor.peripheral.state == .disconnected {
@@ -64,12 +64,12 @@ extension CyclingPowerService {
          */
         open func setResistanceMode(resistance: Float) {
             ergWriteTimer?.invalidate()
-            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setResistanceMode(resistance)), writeType: .withResponse)
+            cbCharacteristic.write(Data(WahooTrainerSerializer.setResistanceMode(resistance)), writeType: .withResponse)
         }
         
         open func setStandardMode(level: UInt8) {
             ergWriteTimer?.invalidate()
-            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setStandardMode(level: level)), writeType: .withResponse)
+            cbCharacteristic.write(Data(WahooTrainerSerializer.setStandardMode(level: level)), writeType: .withResponse)
         }
         
         // Minimum interval between ERG writes to the trainer to give it time to react and apply a new setting.
@@ -93,34 +93,34 @@ extension CyclingPowerService {
         
         open func setSimMode(weight: Float, rollingResistanceCoefficient: Float, windResistanceCoefficient: Float) {
             ergWriteTimer?.invalidate()
-            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.seSimMode(weight: weight, rollingResistanceCoefficient: rollingResistanceCoefficient, windResistanceCoefficient: windResistanceCoefficient)), writeType: .withResponse)
+            cbCharacteristic.write(Data(WahooTrainerSerializer.seSimMode(weight: weight, rollingResistanceCoefficient: rollingResistanceCoefficient, windResistanceCoefficient: windResistanceCoefficient)), writeType: .withResponse)
         }
         
         open func setSimCRR(_ rollingResistanceCoefficient: Float) {
-            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setSimCRR(rollingResistanceCoefficient)), writeType: .withResponse)
+            cbCharacteristic.write(Data(WahooTrainerSerializer.setSimCRR(rollingResistanceCoefficient)), writeType: .withResponse)
         }
         
         open func setSimWindResistance(_ windResistanceCoefficient: Float) {
-            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setSimWindResistance(windResistanceCoefficient)), writeType: .withResponse)
+            cbCharacteristic.write(Data(WahooTrainerSerializer.setSimWindResistance(windResistanceCoefficient)), writeType: .withResponse)
         }
         
         open func setSimGrade(_ grade: Float) {
-            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setSimGrade(grade)), writeType: .withResponse)
+            cbCharacteristic.write(Data(WahooTrainerSerializer.setSimGrade(grade)), writeType: .withResponse)
         }
         
         open func setSimWindSpeed(_ metersPerSecond: Float)  {
-            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setSimWindSpeed(metersPerSecond)), writeType: .withResponse)
+            cbCharacteristic.write(Data(WahooTrainerSerializer.setSimWindSpeed(metersPerSecond)), writeType: .withResponse)
         }
         
         open func setWheelCircumference(_ millimeters: Float) {
-            cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.setWheelCircumference(millimeters)), writeType: .withResponse)
+            cbCharacteristic.write(Data(WahooTrainerSerializer.setWheelCircumference(millimeters)), writeType: .withResponse)
         }
         
         private var ergWriteWatts: UInt16?
         private var ergWriteTimer: Timer?
         /// Private function to execute an ERG write
         @objc private func writeErgWatts(_ timer: Timer? = nil) {
-            if let writeWatts = ergWriteWatts, cbCharacteristic.write(Data(bytes: WahooTrainerSerializer.seErgMode(writeWatts)), writeType: .withResponse) {
+            if let writeWatts = ergWriteWatts, cbCharacteristic.write(Data(WahooTrainerSerializer.seErgMode(writeWatts)), writeType: .withResponse) {
                 ergWriteWatts = nil
             } else {
                 ergWriteTimer?.invalidate()

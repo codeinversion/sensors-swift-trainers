@@ -71,13 +71,13 @@ open class JetBlackService: Service, ServiceProtocol {
     
     @discardableResult open func setTargetPower(_ watts: UInt16) -> [UInt8] {
         let bytes = JetBlackSerializer.setTargetPower(watts)
-        slowChange?.cbCharacteristic.write(Data(bytes: bytes), writeType: SlowChange.writeType)
+        slowChange?.cbCharacteristic.write(Data(bytes), writeType: SlowChange.writeType)
         return bytes
     }
     
     @discardableResult open func setRiderWeight(_ weight: UInt16) -> [UInt8] {
         let bytes = JetBlackSerializer.setRiderWeight(weight)
-        slowChange?.cbCharacteristic.write(Data(bytes: bytes), writeType: SlowChange.writeType)
+        slowChange?.cbCharacteristic.write(Data(bytes), writeType: SlowChange.writeType)
         return bytes
     }
     
@@ -87,7 +87,7 @@ open class JetBlackService: Service, ServiceProtocol {
                                                                grade: grade,
                                                                windSpeed: windSpeed,
                                                                draftingFactor: draftingFactor)
-        fastChange?.cbCharacteristic.write(Data(bytes: bytes), writeType: FastChange.writeType)
+        fastChange?.cbCharacteristic.write(Data(bytes), writeType: FastChange.writeType)
         return bytes
     }
 }

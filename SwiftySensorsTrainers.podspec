@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
     spec.name           = 'SwiftySensorsTrainers'
-    spec.version        = '1.0.0'
+    spec.version        = '1.1.0'
     spec.summary        = 'Trainer Plugins for SwiftySensors'
 
     spec.homepage       = 'https://github.com/kinetic-fit/sensors-swift-trainers'
@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
     spec.source         = { :git => 'https://github.com/kinetic-fit/sensors-swift-trainers.git',
                             :tag => spec.version.to_s }
     spec.source_files   = 'Source/**/*.swift', 'Headers/*.h'
-    spec.swift_version  = '4.2'
+    spec.swift_version  = '5.0'
 
     spec.ios.vendored_library   = 'Libraries/libKineticSDKiOS.a'
     spec.osx.vendored_library   = 'Libraries/libKineticSDKmacOS.a'

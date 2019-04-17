@@ -1,10 +1,10 @@
 PODS:
-  - Signals (5.0.0)
-  - SwiftySensors (0.6.1):
-    - Signals (~> 5.0)
-    - SwiftySensors/Serializers (= 0.6.1)
-  - SwiftySensors/Serializers (0.6.1):
-    - Signals (~> 5.0)
+  - Signals (6.1.0)
+  - SwiftySensors (1.1.0):
+    - Signals
+    - SwiftySensors/Serializers (= 1.1.0)
+  - SwiftySensors/Serializers (1.1.0):
+    - Signals
 
 DEPENDENCIES:
   - Signals
@@ -20,13 +20,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftySensors:
-    :commit: 0ecb43265b2bde0aec066fe85bbaae42e1448905
+    :commit: 63a1c32b05efe9f27cfa917fa46cb848bd26ea25
     :git: https://github.com/kinetic-fit/sensors-swift
 
 SPEC CHECKSUMS:
-  Signals: 6c41253cc172e4251d6064341bbc555a589c8d9f
-  SwiftySensors: 7e5489c1565cc7445483fb6f6c0ea136c3f798b6
+  Signals: f8e5c979e93c35273f8dfe55ee7f47213d3e8fe8
+  SwiftySensors: 1de6d309d97b40ed8d3838438a7e9952442ce80f
 
 PODFILE CHECKSUM: aab3cb062d14952238f7d162b261da78f785751d
 
-COCOAPODS: 1.6.0.beta.1
+COCOAPODS: 1.7.0.beta.2

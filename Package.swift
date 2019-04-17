@@ -27,6 +27,6 @@ import PackageDescription
 let package = Package(
     name: "SwiftySensorsTrainers",
     dependencies: [
-        .Package(url: "https://github.com/kinetic-fit/sensors-swift", Version(0, 4, 0))
+        .Package(url: "https://github.com/kinetic-fit/sensors-swift", Version(1, 1, 0))
     ]
 )
