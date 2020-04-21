@@ -1,6 +1,0 @@
-framework module SwiftySensors {
-  umbrella header "SwiftySensors-macOS-umbrella.h"
-
-  export *
-  module * { export * }
-}

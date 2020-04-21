@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftySensors",
+        "repositoryURL": "https://github.com/kinetic-fit/sensors-swift",
+        "state": {
+          "branch": "master",
+          "revision": "5affbbb08f3f520633a867966f1d2eb8d8c8466f",
+          "version": null
+        }
+      },
+      {
+        "package": "KineticSensors",
+        "repositoryURL": "https://github.com/kinetic-fit/sensors-swift-kinetic",
+        "state": {
+          "branch": "master",
+          "revision": "4203557d48d00c8bab47450d3b2bef35903dca05",
+          "version": null
+        }
+      },
+      {
+        "package": "Signals",
+        "repositoryURL": "https://github.com/artman/Signals",
+        "state": {
+          "branch": null,
+          "revision": "e792eb51a64f85d043d17f09f6323b803b9f73b8",
+          "version": "6.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

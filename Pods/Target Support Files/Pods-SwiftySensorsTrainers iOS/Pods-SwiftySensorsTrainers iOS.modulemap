@@ -1,6 +1,0 @@
-framework module Pods_SwiftySensorsTrainers_iOS {
-  umbrella header "Pods-SwiftySensorsTrainers iOS-umbrella.h"
-
-  export *
-  module * { export * }
-}

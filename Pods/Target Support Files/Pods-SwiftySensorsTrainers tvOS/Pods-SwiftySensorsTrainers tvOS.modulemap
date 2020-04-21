@@ -1,6 +1,0 @@
-framework module Pods_SwiftySensorsTrainers_tvOS {
-  umbrella header "Pods-SwiftySensorsTrainers tvOS-umbrella.h"
-
-  export *
-  module * { export * }
-}
