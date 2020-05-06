@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/kinetic-fit/sensors-swift",
         "state": {
           "branch": "master",
-          "revision": "5affbbb08f3f520633a867966f1d2eb8d8c8466f",
+          "revision": "4525ec63ce2f21379235406b8fac61c9a99dbb56",
           "version": null
         }
       },
@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/kinetic-fit/sensors-swift-kinetic",
         "state": {
           "branch": "master",
-          "revision": "4203557d48d00c8bab47450d3b2bef35903dca05",
+          "revision": "9335f102797f52e285054275cadcd1b3e15ae2ae",
           "version": null
         }
       },

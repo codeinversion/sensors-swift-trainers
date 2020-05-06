@@ -219,18 +219,7 @@ open class SmartControlService: Service, ServiceProtocol {
         }
         return false
     }
-    
-    open func writeSensorName(_ deviceName: String) {
-        if let controlPoint = controlPoint {
-            do {
-                let command = try KineticControl.setDeviceName(deviceName)
-                controlPoint.cbCharacteristic.write(command, writeType: .withResponse)
-            } catch let error as NSError {
-                SensorManager.logSensorMessage?(error.localizedDescription)
-            }
-        }
-    }
-    
+        
     private var targetWatts: UInt16? {
         didSet {
             if let targetWatts = targetWatts {
